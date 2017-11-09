@@ -66,10 +66,10 @@ router.route('/api/producto/:id')
 .put(product.update)
 .delete(product.delete);
 
-const ml = require('./server/controllers/api/mercadolibre');
+// const ml = require('./server/controllers/api/mercadolibre');
 
-router.post('/api/mercadolibre/solicitarpago',ml.generarsoldinero);
-router.get('/api/mercadolibre/accesstoken',ml.generarAccessToken);
+// router.post('/api/mercadolibre/solicitarpago',ml.generarsoldinero);
+// router.get('/api/mercadolibre/accesstoken',ml.generarAccessToken);
 
 
 //PEDIDO - rutas de acceso a la api. esto se accede desde el services.ts de pedido con x ej: this.http.post('http://localhost:3000/api/pedido/
