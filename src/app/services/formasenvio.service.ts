@@ -22,6 +22,6 @@ export class FormasEnvioService {
     // Se declara cómo va a ser la llamada 
     // ocultando los pormenores a los consumidores   
     return this.http
-      .get('http://localhost:3000/api/formasenvio');
+      .get('https://millped.herokuapp.com/api/formasenvio');
   }
 }
