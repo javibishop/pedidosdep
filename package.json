@@ -1,7 +1,9 @@
 {
   "name": "pedidos",
   "version": "0.0.0",
-  "license": "MIT",
+  "engines": {
+    "node": "6.11.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node server.js",  
