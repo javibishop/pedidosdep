@@ -1,0 +1,36 @@
+.modal-body {
+    width: 800px;
+}
+
+.modal-content {
+    width: 800px;
+}
+   
+ .center-block {  
+    padding-top: 10px;
+    display: block;  
+    margin-right: auto;  
+    margin-left: auto;  
+  } 
+
+  #th{
+    text-align: center !important;
+  }
+  
+  .dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.card-header{
+    background-color:darkgrey;
+    margin-top: 10px;
+}
+.card-body{
+    width: 100%;
+}

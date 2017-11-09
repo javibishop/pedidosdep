@@ -1,0 +1,40 @@
+<script src="../../../../node_modules/chart.js/chart"></script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-sm-2" id="divespacio">
+          </div>
+      <div class="col-lg-10">
+      
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        options="{
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+              
+      </div>
+    </div>
+</div>
+
+<button type="button" id="buttonUpdateChart" (click)="actualizarcontadores()"> Generar Grafico</button>
+<script>
+    $(document).ready(function() {
+        $('#buttonUpdateChart').click();
+    });
+    
+  </script>
+

@@ -1,0 +1,42 @@
+<div class="parent">
+    <!-- <label for="hy">There are plenty of events along the lifetime of a drag event. <a href="https://github.com/bevacqua/dragula#drakeon-events">all of them</a> in the docs!</label> -->
+    <div class="wrapper">
+        <div class="containerDrag" id="aPreparar" [dragula]="'second-bag'" [dragulaModel]='aPreparar'>
+            <div *ngIf="!aPreparar.length">Sin pedidos a preparar</div>
+            <div *ngFor="let item of aPreparar; let i = index" [ngStyle]="setEstiloDiv(item.estilo)" data-toggle="tooltip" data-placement="top" title={{item.tooltip}}>
+                <code>{{item.nombre | truncate : [25,'.']}} </code> - <code>{{item.numero}}</code> - <code>{{item.cliente}}</code>
+                <input type="hidden" id="hdnId" value="{{item.id}}" />
+                <i *ngIf="item.tienedeuda > 0" class="fa fa-money pull-left" aria-hidden="true" rel="tooltip" title="Pedido con deuda"></i>
+                <i *ngIf="item.solicitadinero > 0" class="fa fa-usd pull-left" aria-hidden="true" rel="tooltip" (click)="solicitarDinero(item.id)" title="Solicita Dinero"></i>
+                <a class="btn-floating btn-sm purple-gradient pull-right" (click)="imprimirPedido(item.id)" ><i class="fa fa-print" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
+                <a class="btn-floating btn-sm purple-gradient pull-right" (click)="updatePedido(item.id)" ><i class="fa fa-pencil" aria-hidden="true" rel="tooltip" title="Modificar pedido"></i></a>
+            </div>
+        </div>
+        <div class="containerDrag" id="preparados" [dragula]="'second-bag'" [dragulaModel]='preparados'>
+            <div *ngIf="!preparados.length">Sin pedidos preparados</div>
+            <div *ngFor="let item of preparados; let i = index" [ngStyle]="setEstiloDiv(item.estilo)" data-toggle="tooltip" data-placement="top" title={{item.tooltip}}>
+                <code>{{item.nombre | truncate : [25,'.']}} </code> - <code>{{item.numero}}</code> - <code>{{item.cliente}}</code>
+                <input type="hidden" id="hdnId" value="{{item.id}}" />
+                <i *ngIf="item.tienedeuda > 0" class="fa fa-money pull-left" aria-hidden="true" rel="tooltip" title="Pedido con deuda"></i>
+                <i *ngIf="item.solicitadinero > 0" class="fa fa-usd pull-left" aria-hidden="true" rel="tooltip" (click)="solicitarDinero(item.id)" title="Solicita Dinero"></i>
+                <a class="btn-floating btn-sm purple-gradient pull-right" (click)="imprimirPedido(item.id)" ><i class="fa fa-print" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
+                <a class="btn-floating btn-sm purple-gradient pull-right"><i class="fa fa-pencil" (click)="updatePedido(item.id)" aria-hidden="true" rel="tooltip" title="Modificar pedido"></i></a>
+            </div>
+        </div>
+        <div class="containerDrag" id="entregados" [dragula]="'second-bag'" [dragulaModel]='entregados'>
+            <div *ngIf="!entregados.length">Sin pedidos entregados</div>
+            <div *ngFor="let item of entregados; let i = index" [ngStyle]="setEstiloDiv(item.estilo)" data-toggle="tooltip" data-placement="top" title={{item.tooltip}} >
+                <code>{{item.nombre | truncate : [25,'.']}} </code> - <code>{{item.numero}}</code> - <code>{{item.cliente}}</code>
+                <input type="hidden" id="hdnId" value="{{item.id}}" />
+                <i *ngIf="item.tienedeuda > 0" class="fa fa-money pull-left" aria-hidden="true" rel="tooltip" title="Pedido con deuda"></i>
+                <i *ngIf="item.solicitadinero > 0" class="fa fa-usd pull-left" aria-hidden="true" (click)="solicitarDinero(item.id)" rel="tooltip" title="Solicita Dinero" ></i>
+                <a class="btn-floating btn-sm purple-gradient pull-right"><i class="fa fa-check-square-o" (click)="finPedidoEvento(item.id)" aria-hidden="true" rel="tooltip" title="Finalizar pedido"></i></a>
+                <a class="btn-floating btn-sm purple-gradient pull-right" (click)="imprimirPedido(item.id)" ><i class="fa fa-print" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
+                <a class="btn-floating btn-sm purple-gradient pull-right"><i class="fa fa-pencil" (click)="updatePedido(item.id)" aria-hidden="true" rel="tooltip" title="Modificar pedido"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" >
+    <app-printcard></app-printcard>
+</div>
