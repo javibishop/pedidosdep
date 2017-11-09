@@ -138,7 +138,7 @@ if(prodserver){
 }
 
 
-mongoose.connect(this.prodserver ? databaseprod : database);
+mongoose.connect(databaseprod);
 
 var db = mongoose.connection;
 db.on('error', console.error);
@@ -152,7 +152,7 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || (prodserver ? portprodserver : '3000' );
+const port = process.env.PORT;
 app.set('port', port);
 
 function startserver(){
