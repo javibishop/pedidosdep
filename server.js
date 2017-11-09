@@ -138,7 +138,7 @@ if(prodserver){
 }
 
 
-mongoose.connect('mongodb://pedid0s:_17chaltenlobens17_@ds249415.mlab.com:49415/heroku_41gcpv9m?authSource=admin');
+mongoose.connect(databaseprod);
 
 var db = mongoose.connection;
 db.on('error', console.error);
