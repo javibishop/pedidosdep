@@ -8,21 +8,21 @@ const database ='mongodb://localhost/pedidos';
 const databaseprod = process.env.MONGODB_URI;
 const portprodserver = '8080';
 const prodserver = true;
-var nodemailer = require("nodemailer");
+//var nodemailer = require("nodemailer");
 
 // Get our API routes
 const api = require('./server/controllers/api');
 const app = express();
 
-var smtpTransport = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-      user: "",
-      pass: ""
-  }
-});
+// var smtpTransport = nodemailer.createTransport({
+  // host: 'smtp.gmail.com',
+  // port: 465,
+  // secure: true,
+  // auth: {
+      // user: "",
+      // pass: ""
+  // }
+// });
 //https://nodemailer.com/smtp/oauth2/
 /*habilita el acceso desde otro dominio o host*/
 app.use(function(req, res, next) {
