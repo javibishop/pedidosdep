@@ -45,7 +45,8 @@
     "tslint": "~5.3.2",
     "typescript": "^2.3.4",
     "zone.js": "^0.8.4",
-	"nodemailer": "4.3.1"
+	"nodemailer": "4.3.1",
+	"mercadopago": "*"
   },
   "devDependencies": {
     "@angular/cli": "^1.2.0",

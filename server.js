@@ -66,7 +66,7 @@ router.route('/api/producto/:id')
 .put(product.update)
 .delete(product.delete);
 
-// const ml = require('./server/controllers/api/mercadolibre');
+ const ml = require('./server/controllers/api/mercadolibre');
 
 // router.post('/api/mercadolibre/solicitarpago',ml.generarsoldinero);
 // router.get('/api/mercadolibre/accesstoken',ml.generarAccessToken);
