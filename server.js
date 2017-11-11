@@ -8,7 +8,7 @@ const database ='mongodb://localhost/pedidos';
 const databaseprod = process.env.MONGODB_URI;
 const portprodserver = '8080';
 const prodserver = true;
-//var nodemailer = require("nodemailer");
+var nodemailer = require("nodemailer");
 
 // Get our API routes
 const api = require('./server/controllers/api');
@@ -26,7 +26,7 @@ const app = express();
 //https://nodemailer.com/smtp/oauth2/
 /*habilita el acceso desde otro dominio o host*/
 app.use(function(req, res, next) {
-  var allowedOrigins = ['http://localhost:4200'];
+  var allowedOrigins = ['https://millped.herokuapp.com'];
   var origin = req.headers.origin;
   if(allowedOrigins.indexOf(origin) > -1){
        res.setHeader('Access-Control-Allow-Origin', origin);
