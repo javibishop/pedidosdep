@@ -14,15 +14,18 @@ var nodemailer = require("nodemailer");
 const api = require('./server/controllers/api');
 const app = express();
 
-// var smtpTransport = nodemailer.createTransport({
-  // host: 'smtp.gmail.com',
-  // port: 465,
-  // secure: true,
-  // auth: {
-      // user: "",
-      // pass: ""
-  // }
-// });
+var smtpTransport = nodemailer.createTransport({
+  host: 'mail.miler.com.ar',
+  port: 587,
+  secure: false,
+  auth: {
+      user: "ventas@miler.com.ar",
+      pass: "VentasMiler1591"
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 //https://nodemailer.com/smtp/oauth2/
 /*habilita el acceso desde otro dominio o host*/
 app.use(function(req, res, next) {
@@ -40,11 +43,13 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/sendmail',function(req,res){
-  var mailOptions={
-      to : 'javibishop@gmail.com',//req.query.to,
-      subject : 'hola', //req.query.subject,
-      text : 'hola',//req.query.text
-  }
+  var mailOptions = {
+    from: 'ventas@miler.com.ar', // sender address
+    to: 'javibishop@gmail.com', // list of receivers
+    cc: 'distribuidoramiler@gmail.com', // Comma separated list or an array
+    subject: 'test upgrde nodemailer subject', // Subject line
+    html: '<b>Hello world </b>' // html body
+};
   console.log(mailOptions);
   smtpTransport.sendMail(mailOptions, function(error, response){
    if(error){
