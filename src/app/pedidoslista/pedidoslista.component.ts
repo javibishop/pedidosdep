@@ -5,6 +5,8 @@ import {PrintcardComponent} from '../components/printcard/printcard.component'
 import { FormasEnvioService } from '../services/formasenvio.service';
 import { FormasPagosService } from '../services/formaspagos.service';
 import { EstadosService } from '../services/estados.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToasterContainerComponent, ToasterService, ToasterConfig} from 'angular2-toaster';
 
 @Component({
   selector: 'app-pedidoslista',
@@ -25,7 +27,7 @@ export class PedidoslistaComponent implements OnInit {
   pedidoInfo : any;
   estados= [];
   formapago= [];
-  formaenvio = [];
+  formasenvios = [];
   nrofactura : string;
   envionumeroguia : string;
   estadoNombre: string;
@@ -34,7 +36,7 @@ export class PedidoslistaComponent implements OnInit {
   token = "APP_USR-6048120304954368-100811-2c7f133a8d06431b3b8c6b621634828b__K_A__-172177242";
 
   constructor(private pedidosService: PedidosService, private route:ActivatedRoute, private renderer: Renderer, private formasEnvioService: FormasEnvioService,private formasPagosService: FormasPagosService,
-    private estadosService: EstadosService) { 
+    private estadosService: EstadosService, private toasterService: ToasterService) { 
   }
 
   ngOnInit() {
@@ -58,6 +60,14 @@ export class PedidoslistaComponent implements OnInit {
     this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
   }
 
+  public toasterconfig : ToasterConfig = 
+  new ToasterConfig({
+      showCloseButton: true, 
+      tapToDismiss: false, 
+      timeout: 0,
+      positionClass:'toast-center'
+  });
+  
   getPedidos(estado){
     this.estadoNombre = estado.nombre;
     this.pedidosService.getPedidoPorEstadoyformaenvio(estado.idestado, this.idformaenvio).map(response => response.json()).subscribe((result: any) => {
@@ -67,10 +77,9 @@ export class PedidoslistaComponent implements OnInit {
 
   getFormasEnvio(){
     this.formasEnvioService.getFormasEnvio().map(response => response.json()).subscribe((result: any) => {
-      this.formaenvio = result;
+      this.formasenvios = result;
     });
   }
-
   
   getFormasPagos(){
     this.formasPagosService.getFormasPagos().map(response => response.json()).subscribe((result: any) => {
@@ -86,10 +95,15 @@ export class PedidoslistaComponent implements OnInit {
         this.estadoNombre = nombre;
       }
     });
-
-    
   }
   
+  setEstiloFormaEnvio(idformaenvio){
+    var fe = this.formasenvios.find(x => x.id == idformaenvio);
+    return {
+      'background-color': fe.color
+    }
+  }
+
   imprimirPedido(pedidoId){
     this.printcardComponent.printPedido(pedidoId);
   }
@@ -154,7 +168,7 @@ export class PedidoslistaComponent implements OnInit {
   grabarPedido(){
     this.pedidosService.grabarPedido(this.pedidoInfo)
     .subscribe((data)=> {
-      console.log(`Received response: ${data}`);
+      this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
     },
     (err)=>{
       console.log(`Oops, an error occurred`);
@@ -162,17 +176,17 @@ export class PedidoslistaComponent implements OnInit {
     })
     this.renderer.invokeElementMethod(this.buttonModalCancel.nativeElement, 'dispatchEvent', [event])
   }
-
+  // http://codeseven.github.io/toastr/demo.html
   eliminarPedido(_id){
     this.pedidosService.eliminarPedido(_id)
     .subscribe(()=> {
-      this.getPedidos(this.estado);
+      this.toasterService.pop('success', 'Información', 'Se elimino el registro.');
+      this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
     },
     (err)=>{
       console.log(`Oops, an error occurred`);
       console.log(`Error: ${err}`);
     })
-    //this.renderer.invokeElementMethod(this.buttonModalCancel.nativeElement, 'dispatchEvent', [event])
   }
 
   selectestado(valor){

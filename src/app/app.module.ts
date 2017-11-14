@@ -21,6 +21,8 @@ import { MenuestadosComponent } from './components/menuestados/menuestados.compo
 import { TruncatePipe } from './pipes/truncate';
 import { ChartsModule } from 'ng2-charts';
 import { GpedidosxformaenvioComponent } from './components/gpedidosxformaenvio/gpedidosxformaenvio.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToasterModule, ToasterService} from 'angular2-toaster';
 
 // https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407
 @NgModule({
@@ -46,7 +48,9 @@ import { GpedidosxformaenvioComponent } from './components/gpedidosxformaenvio/g
     FormsModule,
     DragulaModule,
     routing,
-    ChartsModule
+    ChartsModule,
+    BrowserAnimationsModule,
+    ToasterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

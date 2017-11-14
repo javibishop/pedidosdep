@@ -62,6 +62,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                                                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="pedidoInfo.nombre" placeholder="Nombre del comprador"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group row">
+                                            <label for="usuario" class="col-sm-4 col-form-label">Usuario</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                                                    <input type="text" class="form-control" name="usuario" id="usuario" [(ngModel)]="pedidoInfo.usuario" placeholder="Usuario"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group row">
                                                     <label for="enviodireccion" class="col-sm-2 col-form-label">Email</label>
@@ -339,7 +363,7 @@
                                 </thead>
                                 <!--Iterate through an observableArray using foreach-->
                                 <tbody *ngFor='let pedido of pedidos'>
-                                    <tr class="small">
+                                    <tr class="small" [ngStyle]="pedido.envioforma && setEstiloFormaEnvio(pedido.envioforma)">
                                         <td>{{pedido.id}}</td>
                                         <td>{{pedido.nombre}}</td>
                                         <td>{{pedido.numerocliente}}</td>
@@ -383,4 +407,5 @@
 <div class="row" >
     <app-printcard></app-printcard>
 </div>
-
+<div><toaster-container [toasterconfig]="toasterconfig">
+    </toaster-container></div>

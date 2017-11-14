@@ -53,7 +53,7 @@
             <app-toolbarestados [formaenvioactual]="idFormaEnvioActual" [pendientes]="pendientes" [apreparar]="apreparar" [preparados]="preparados" [entregados]="entregados" [finalizados]="finalizados"></app-toolbarestados>            
         </div>
         <div>
-            <app-dragula [aPreparar]="dAPreparar" [preparados]="dPreparado" [entregados]="dEntregado" (cambioEstadoEvento)="actualizarEstado($event)" (modificarPedidoEvento)="editarPedidoEnModal($event)" (finalizarPedidoEvento)="finalizarPedido($event)"></app-dragula>                
+            <app-dragula [colorfondo]="colorformaenvio" [aPreparar]="dAPreparar" [preparados]="dPreparado" [entregados]="dEntregado" (cambioEstadoEvento)="actualizarEstado($event)" (modificarPedidoEvento)="editarPedidoEnModal($event)" (finalizarPedidoEvento)="finalizarPedido($event)"></app-dragula>                
         </div>
       </div>
     </div>
@@ -121,6 +121,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="pedidoInfo.nombre" placeholder="Nombre del comprador"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="usuario" class="col-sm-4 col-form-label">Usuario</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="usuario" id="usuario" [(ngModel)]="pedidoInfo.usuario" placeholder="Usuario"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group row">

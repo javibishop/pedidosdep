@@ -22,6 +22,6 @@ export class EstadosService {
     // Se declara cómo va a ser la llamada 
     // ocultando los pormenores a los consumidores   
     return this.http
-      .get('https://millped.herokuapp.com/api/estados');
+      .get('http://localhost:3000/api/estados');
   }
 }

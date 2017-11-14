@@ -19,6 +19,7 @@ export class DragulaComponent implements OnInit {
   @Input() aPreparar: IDragula[];
   @Input() preparados: IDragula[];
   @Input() entregados: IDragula[];
+  @Input() colorfondo: string;
   @ViewChild(PrintcardComponent) printcardComponent : PrintcardComponent;
 
   /*aca iria uno por columna */
@@ -98,11 +99,15 @@ export class DragulaComponent implements OnInit {
     });;
   }
 
-  imprimirPedido(pedidoId){
-    this.printcardComponent.printPedido(pedidoId);
+  imprimirPedido(pedidoId, idmercadoenvio){
+    if(idmercadoenvio){
+      window.open("https://myaccount.mercadolibre.com.ar/sales/shipments/printShipmentsLabels?ids=" + parseInt(idmercadoenvio) + "", "_blank");
+    }
+    else{
+      this.printcardComponent.printPedido(pedidoId);
+    }
   }
 
-  
   updatePedido(id){
     this.modificarPedidoEvento.emit({id:id}); 
   }

@@ -48,6 +48,7 @@ export class PedidosComponent implements OnInit {
   envioforma='';
   pagoforma='';
   espedidomercadolibre = false;
+  colorformaenvio:string;
 
   public dA :  IDragula[] = [];
   public dAPreparar :  IDragula[] = [];
@@ -81,7 +82,7 @@ export class PedidosComponent implements OnInit {
     this.getFormasEnvio();
     this.getFormasPagos();
     this.getEstados();
-    this.obtenerPedidosPorFormaEnvio(1);
+    this.obtenerPedidosPorFormaEnvio({id:1, color: 'red'});
     
     //this.colores   = [{value:'', label:'Sin Color'},{value:'red', label:'Rojo'},{value:'green', label:'Verde'},{value:'blue', label:'Azul'},{value:'yellow', label:'Amarillo'} ,{value:'orange', label:'Naranja'}];
   }
@@ -90,7 +91,7 @@ export class PedidosComponent implements OnInit {
   grabarPedido(){
     this.pedidosService.grabarPedido(this.pedidoInfo).subscribe(data => {
       this.pedidoInfo = this.createPedido();
-      this.obtenerPedidosPorFormaEnvio(this.idFormaEnvioActual);
+      this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
       });
   }
   
@@ -107,14 +108,15 @@ export class PedidosComponent implements OnInit {
     var pedido = this.pedidos.find(x => x._id == data.id);
     pedido.estado = '5';
     this.pedidosService.actualizarPedido(pedido).subscribe(dataresult => {
-      this.obtenerPedidosPorFormaEnvio(this.idFormaEnvioActual);
+      this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
     });
   }
   
   /*Obtiene los pedidos por forma de envio, tambien se ejecuta al cambiar de fomra de envio desde la toolbar*/
-  obtenerPedidosPorFormaEnvio(idformaenvio){
-    this.idFormaEnvioActual = idformaenvio;
-    this.pedidosService.getPedidosPorEnvioForma(idformaenvio).map(response => response.json()).subscribe((result: any) => {
+  obtenerPedidosPorFormaEnvio(formaenvio){
+    this.idFormaEnvioActual = formaenvio.id;
+    this.colorformaenvio = formaenvio.color;
+    this.pedidosService.getPedidosPorEnvioForma(formaenvio.id).map(response => response.json()).subscribe((result: any) => {
       this.pedidos = result;
       this.contarPedidosYArmarArrayDragula();
       this.getPedidoCountPorFormaEnvio();
@@ -212,7 +214,7 @@ export class PedidosComponent implements OnInit {
       pedido.fechaentregado = fechaentregado;
 
       this.pedidosService.actualizarPedido(pedido).subscribe(dataresult => {
-        this.obtenerPedidosPorFormaEnvio(this.idFormaEnvioActual);
+        this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
       });
     }
   }
@@ -286,7 +288,7 @@ export class PedidosComponent implements OnInit {
       };
       
       var tooltip = 'Tel:' + pedido.telefono + '\n' + 'Nombre: ' + pedido.nombre + '\n' + 'Alta: ' + (pedido.fechaalta ?  pedido.fechaalta.slice(0,10) : '') + '\n' + 'Preparado: ' + (pedido.fechapreparado ? pedido.fechapreparado.slice(0,10) : '') + '\n' + 'Facturado: ' + (pedido.fechafacturado ? pedido.fechafacturado.slice(0,10) :  '')+ '\n' + 'Enviado: ' + (pedido.fechaenviado ? pedido.fechaenviado.slice(0,10) :  '')+ '\n' + 'Recibido: ' + (pedido.fecharecibido ? pedido.fecharecibido.slice(0,10) :  '') + '\n' + 'Finalizado: ' + (pedido.fechafinalizado ?  pedido.fechafinalizado.slice(0,10) :  '') ;
-      var dragula = new Dragula(pedido._id, pedido.id, pedido.nombre, pedido.numerooc, pedido.numerocliente, (pedido.pagosolicitadinero > 0), (pedido.envioadeuda  > 0), pedido.color1, tooltip);
+      var dragula = new Dragula(pedido._id, pedido.envioidmercadolibre, pedido.id, pedido.nombre, pedido.numerooc, pedido.numerocliente, (pedido.pagosolicitadinero > 0), (pedido.envioadeuda  > 0), pedido.color1, tooltip);
       return dragula;
   }
 

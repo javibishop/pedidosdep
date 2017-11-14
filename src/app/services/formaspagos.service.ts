@@ -21,6 +21,6 @@ export class FormasPagosService {
     // Se declara cómo va a ser la llamada 
     // ocultando los pormenores a los consumidores   
     return this.http
-      .get('https://millped.herokuapp.com/api/formaspagos');
+      .get('http://localhost:3000/api/formaspagos');
   }
 }

@@ -4,6 +4,7 @@ import {IDragula} from './dragula.interface'
 export class Dragula {
     constructor(
         public id: string,
+        public idmercadoenvio: string,
         public pedidoId: number,
         public nombre: string,
         public numero: string,

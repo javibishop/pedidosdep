@@ -27,9 +27,17 @@ export class MenuformasenviosComponent implements OnInit {
     this.getFormasEnvio();
   }
 
-  iralistadopedido(idformaenvio){
+  iralistadopedido(idformaenvio, color){
     this.idformaenvioactivo = idformaenvio;
-    this.cambioMetodoEnvio.emit(idformaenvio); 
+    this.cambioMetodoEnvio.emit({id:idformaenvio, color: color}); 
+  }
+
+  setEstiloFormaEnvio(color) {
+    return {
+      'background-color': color, /* Add a green color to the "active/current" link */
+      'color': 'black',
+      'font-weight': 'bold'
+    }
   }
 
   actualizarcontadores(){
