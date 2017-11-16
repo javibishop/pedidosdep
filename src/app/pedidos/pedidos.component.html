@@ -299,5 +299,5 @@
 </div> -->
 
 <footer>
-    <input type="input" class="form-control" name="token" id="token" [(ngModel)]="token" placeholder="token"/>
+    <input type="input" class="form-control" name="token" id="token" (focusout)="setGlobalToken()" [(ngModel)]="token" placeholder="token"/>
 </footer>

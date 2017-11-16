@@ -21,7 +21,7 @@ export class PedidoslistaComponent implements OnInit {
   @ViewChild('buttonModalFacturar') buttonModalFacturar:ElementRef;
   @ViewChild('buttonModalFacturarCancel') buttonModalFacturarCancel:ElementRef;
   @ViewChild(PrintcardComponent) printcardComponent : PrintcardComponent;
-
+  enviarmail: boolean;
   pedidos = [];
   estado = 0;
   pedidoInfo : any;
@@ -33,7 +33,7 @@ export class PedidoslistaComponent implements OnInit {
   estadoNombre: string;
   comentario: string;
   idformaenvio: 0;
-  token = "APP_USR-6048120304954368-100811-2c7f133a8d06431b3b8c6b621634828b__K_A__-172177242";
+  token = "";
 
   constructor(private pedidosService: PedidosService, private route:ActivatedRoute, private renderer: Renderer, private formasEnvioService: FormasEnvioService,private formasPagosService: FormasPagosService,
     private estadosService: EstadosService, private toasterService: ToasterService) { 
@@ -135,18 +135,31 @@ export class PedidoslistaComponent implements OnInit {
   
 
   enviarPedido(){
+    let event2 = new MouseEvent('click', {bubbles: true});
     this.pedidoInfo.envionumeroguia = this.envionumeroguia;
     this.pedidoInfo.fechaenviado = new Date();
     this.pedidoInfo.comentario = this.comentario;
     this.pedidosService.grabarPedido(this.pedidoInfo)
     .subscribe((data)=> {
-      console.log(`Received response: ${data}`);
+      if(this.enviarmail){
+        this.sendmail();
+        this.renderer.invokeElementMethod(this.buttonModalFacturarCancel.nativeElement, 'dispatchEvent', [event2])
+      }
     },
     (err)=>{
       console.log(`Oops, an error occurred`);
       console.log(`Error: ${err}`);
     })
-    this.renderer.invokeElementMethod(this.buttonModalFacturarCancel.nativeElement, 'dispatchEvent', [event])
+  }
+
+  sendmail(){
+    this.pedidosService.sendmail({comentario: this.pedidoInfo.comentario, envionumeroguia:this.pedidoInfo.envionumeroguia,destinatario: this.pedidoInfo.mail})
+    .subscribe(()=> {
+    },
+    (err)=>{
+      console.log(`Oops, an error occurred`);
+      console.log(`Error: ${err}`);
+    })
   }
 
   facturarPedido(){
@@ -197,15 +210,5 @@ export class PedidoslistaComponent implements OnInit {
   }
   selectpagoforma(valor){
         this.pedidoInfo.pagoforma = valor;
-  }
-
-  sendmail(){
-    this.pedidosService.sendmail()
-    .subscribe(()=> {
-    },
-    (err)=>{
-      console.log(`Oops, an error occurred`);
-      console.log(`Error: ${err}`);
-    })
   }
 }

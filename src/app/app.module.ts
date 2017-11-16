@@ -23,6 +23,7 @@ import { ChartsModule } from 'ng2-charts';
 import { GpedidosxformaenvioComponent } from './components/gpedidosxformaenvio/gpedidosxformaenvio.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
+import { AppGlobals } from './app.global';
 
 // https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407
 @NgModule({
@@ -52,7 +53,7 @@ import {ToasterModule, ToasterService} from 'angular2-toaster';
     BrowserAnimationsModule,
     ToasterModule
   ],
-  providers: [],
+  providers: [AppGlobals],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

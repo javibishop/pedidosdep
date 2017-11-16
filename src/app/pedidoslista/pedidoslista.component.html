@@ -231,7 +231,7 @@
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-sm" #buttonModalCancel data-dismiss="modal">Cancelar</button>
-                            <button  type="submit" class="btn btn-primary btn-sm" onclick=" $('#exampleModal').modal('hide')">Guardar</button>
+                            <button  type="submit" class="btn btn-primary btn-sm" onclick="$('#exampleModal').modal('hide')">Guardar</button>
                         </div>
                     </div>
                 </form>
@@ -317,7 +317,8 @@
                     </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" #buttonModalEnviarCancel data-dismiss="modal">Cancelar</button>
-                    <button  type="submit" class="btn btn-primary btn-sm" onclick=" $('#enviarModal').modal('hide')">Guardar</button>
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="enviarmail = false" onclick="$('#enviarModal').modal('hide')">Guardar</button>
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="enviarmail = true" onclick="$('#enviarModal').modal('hide')">Guardar y Enviar Mail</button>
                 </div>
             </div>
         </form>
@@ -358,7 +359,6 @@
                                         <th style="max-width:10px;"></th>
                                         <th style="max-width:10px !important;"></th>
                                         <th style="max-width:10px !important;"></th>
-                                        <th style="max-width:10px !important;"></th>
                                     </tr>
                                 </thead>
                                 <!--Iterate through an observableArray using foreach-->
@@ -377,7 +377,6 @@
                                         <td style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-print" (click)="imprimirPedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
                                         <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-money" (click)="modalFacturar(pedido._id)" aria-hidden="true" rel="tooltip" title="Facturar pedido"></i></a>
                                         <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-paper-plane-o" (click)="modalEnviar(pedido._id)" aria-hidden="true" rel="tooltip" title="Enviar pedido"></i></a>
-                                        <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-paper-plane-o" (click)="sendmail()" aria-hidden="true" rel="tooltip" title="Enviar mail"></i></a>
                                         <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-id-card-o" *ngIf="pedido.envioidmercadolibre > 0" (click)="imprimirEtiquetaML(pedido.envioidmercadolibre)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta Mercado Libre"></i></a><td>
                                     </tr>
                                     <!-- <div class="btn-group">

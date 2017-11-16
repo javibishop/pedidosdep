@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response,RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-// import { productos } from '../../server/models/productos';
 import { Document, Schema, Model, model} from "mongoose";
-
-//import  pedido from '../../server/models/pedidos.js';
-
 import 'rxjs/add/operator/map';
-
+import { AppGlobals } from "../app.global"
 
 @Injectable()
 export class PedidosService {
@@ -15,9 +11,8 @@ export class PedidosService {
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
 
-  private heroesUrl = 'api/heroes';  // URL to web api
-
-  constructor(private http: Http) { }
+  constructor(private http: Http, private global: AppGlobals) { 
+  }
 
  getUserInfo(user_id) {
     return this.http.get(`https://api.mercadolibre.com/users/`+ parseInt(user_id))
@@ -36,11 +31,11 @@ getProductoInfo(pedidoId) {
 
   actualizarPedido(pedido) {
     var newJson = JSON.parse(JSON.stringify(pedido));
-    return this.http.put('https://millped.herokuapp.com/api/pedido/' + newJson._id, newJson)
+    return this.http.put(this.global.serviceurl + 'api/pedido/' + newJson._id, newJson)
   }
 
   eliminarPedido(_id){
-      return this.http.delete('https://millped.herokuapp.com/api/pedido/' + _id)
+      return this.http.delete(this.global.serviceurl + 'api/pedido/' + _id)
       .map((res:Response) => res.json());
   }
   grabarPedido(pedido) {
@@ -49,18 +44,18 @@ getProductoInfo(pedidoId) {
       return this.actualizarPedido(newJson);
     }
     else{
-      return this.http.post('https://millped.herokuapp.com/api/pedido', newJson)
+      return this.http.post(this.global.serviceurl + 'api/pedido', newJson)
       .map((res:Response) => res.json());
     }
   }
 
   getPedidoPorId(pedidoId: any) {
-    return this.http.get('https://millped.herokuapp.com/api/pedido/' + pedidoId)
+    return this.http.get(this.global.serviceurl + 'api/pedido/' + pedidoId)
     .map((res:Response) => res.json());
   }
 
   getPedidoPorIdML(pedidoId) {
-    return this.http.get('https://millped.herokuapp.com/api/pedidos/pedidoml/' + pedidoId)
+    return this.http.get(this.global.serviceurl + 'api/pedidos/pedidoml/' + pedidoId)
     .map((res:Response) => res.json());
   }
 
@@ -71,19 +66,19 @@ getProductoInfo(pedidoId) {
   }
 
   getPedidoPorEstado(estado) {
-    return this.http.get('https://millped.herokuapp.com/api/pedidos/estado/' + estado);
+    return this.http.get(this.global.serviceurl + 'api/pedidos/estado/' + estado);
   }
 
   getPedidoPorEstadoyformaenvio(estado, idformaenvio) {
     var parametros = JSON.stringify({ estado: estado, idformaenvio: parseInt(idformaenvio)});
-    return this.http.get('https://millped.herokuapp.com/api/pedidos/estadoyformaenvio?estado='+estado+'&idformaenvio=' + idformaenvio);
+    return this.http.get(this.global.serviceurl + 'api/pedidos/estadoyformaenvio?estado='+estado+'&idformaenvio=' + idformaenvio);
   }
 
   solicitardinero(monto) {
     var data = {'valor': monto};
-   return this.http.post('https://millped.herokuapp.com/api/mercadolibre/solicitarpago',  data);
+   return this.http.post(this.global.serviceurl + 'api/mercadolibre/solicitarpago',  data);
 
-  // return this.http.get('https://millped.herokuapp.com/api/mercadolibre/accesstoken').map((res:Response) => {
+  // return this.http.get(this.global.serviceurl + 'api/mercadolibre/accesstoken').map((res:Response) => {
   //   return res.text();
   // });
 }
@@ -100,10 +95,10 @@ getProductoInfo(pedidoId) {
   }
   
     //return this.http.post('https://api.mercadopago.com/money_requests?access_token=TEST-2434647748681214-110414-37b7f84afd13191be6476a84d4266194__LA_LB__-103767', data2);
-    //return this.http.post('https://millped.herokuapp.com/api/mercadolibre/solicitarpago',  data);
+    //return this.http.post(this.global.serviceurl + 'api/mercadolibre/solicitarpago',  data);
 
   // getProductos() {
-  //    this.http.get('https://millped.herokuapp.com/api/products').subscribe(data => {
+  //    this.http.get(this.global.serviceurl + 'api/products').subscribe(data => {
   //     return data.json();
   //   }) 
   // }
@@ -113,61 +108,61 @@ getPedidos(): Observable<Response> {
     // Se declara cómo va a ser la llamada 
     // ocultando los pormenores a los consumidores   
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos');
+      .get(this.global.serviceurl + 'api/pedidos');
     // En este momento aún no se efectuó la llamada
   }
  
       // las llamadas devuelven observables
   getPendientes(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/pendiente');
+      .get(this.global.serviceurl + 'api/pedidos/pendiente');
   }
 
   getApreparar(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/apreparar');
+      .get(this.global.serviceurl + 'api/pedidos/apreparar');
   }
 
   getPreparados(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/preparado');
+      .get(this.global.serviceurl + 'api/pedidos/preparado');
   }
 
   getEntregados(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/entregado');
+      .get(this.global.serviceurl + 'api/pedidos/entregado');
   }
 
   getFinalizados(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/finalizado');
+      .get(this.global.serviceurl + 'api/pedidos/finalizado');
   }
 
   getPedidosPaneles(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/paneles');
+      .get(this.global.serviceurl + 'api/pedidos/paneles');
   }
 
   getPedidosPorEnvioForma(envioformaid): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/pedidoformaenvio/' + envioformaid);
+      .get(this.global.serviceurl + 'api/pedidos/pedidoformaenvio/' + envioformaid);
   }
 
   getPedidoCountPorFormaEnvio(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/pedidosporformaenviocount');
+      .get(this.global.serviceurl + 'api/pedidos/pedidosporformaenviocount');
   }
 
   getPedidoCountPorFormaEnvioChart(): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/pedidos/pedidosporformaenviocountchart');
+      .get(this.global.serviceurl + 'api/pedidos/pedidosporformaenviocountchart');
   }
 
-  sendmail(): Observable<Response> {  
+  sendmail(datos): Observable<Response> {  
     return this.http
-      .get('https://millped.herokuapp.com/api/sendmail');
+      .post(this.global.serviceurl + 'api/sendmail', JSON.parse(JSON.stringify(datos)));
   }
-  
+  //para en el post q el dato aparezca en el body, tienen que ir con JSON.parse(JSON.stringify(
 }
 
  

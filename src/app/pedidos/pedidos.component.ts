@@ -8,7 +8,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { FormasEnvioService } from '../services/formasenvio.service';
 import { FormasPagosService } from '../services/formaspagos.service';
 import { EstadosService } from '../services/estados.service';
-
+import { AppGlobals } from "../app.global"
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -20,7 +20,7 @@ export class PedidosComponent implements OnInit {
 
   integradoConMercadoLibre = true;
   userInfo = {};
-  token = "APP_USR-6048120304954368-110318-96c759373ad02c752ed1c8bf17bf6aa8__B_G__-172177242";
+  token : string;
   pedidoId = 0;
   pedidoInfo : IPedido;
   pedidosPorEnvio = [];
@@ -57,7 +57,7 @@ export class PedidosComponent implements OnInit {
   private color: string = "#127bdc";
   constructor(private pedidosService: PedidosService, private formaenvioService: FormasEnvioService,private formasPagosService: FormasPagosService,
     private estadosService: EstadosService,
-    private renderer: Renderer, private route:Router) { }
+    private renderer: Renderer, private route:Router, private global: AppGlobals) { }
 
   ngOnInit() {
     this.pedidoInfo = this.createPedido();
@@ -231,6 +231,10 @@ export class PedidosComponent implements OnInit {
     );
   }
 
+  setGlobalToken(){
+    this.global.token = this.token;
+  }
+
   loadUserInfo() {
     this.pedidosService.getUserInfo(103767).subscribe(data => 
     this.userInfo = data
@@ -258,7 +262,7 @@ export class PedidosComponent implements OnInit {
   /*Obtiene la info del pedido de mercado libre, necesita token y nro de pedido ml*/
   getPedidoInfo(){
     if(this.integradoConMercadoLibre){
-      this.pedidosService.getPedidoInfo(this.pedidoInfo.id, this.token).subscribe(data => {
+      this.pedidosService.getPedidoInfo(this.pedidoInfo.id, this.global.token).subscribe(data => {
         this.pedidoInfo = this.mapPedidoMLibreToIPedido(data)
         this.espedidomercadolibre = true;
       });

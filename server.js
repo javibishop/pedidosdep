@@ -42,27 +42,36 @@ app.use(function(req, res, next) {
   return next();
 });
 
-app.get('/api/sendmail',function(req,res){
+const router = express.Router();
+
+router.post('/api/sendmail',function(req,res){
+  var texto = "<div><p>Hola, ya enviamos tu pedido por la empresa "+req.body.comentario+", el numero de seguimiento es "+req.body.envionumeroguia+".</p> <br>"
+  texto += "<p>Podes realizar el seguimiento de tu envio ingresando al siguiente link seleccionando la empresa por la cual despachamos tu pedido.</p> <br>";
+  texto += "<p>http://www.distribuidoramiler.com.ar/seguimiento-de-envios_6xST</p> <br>";
+  texto += "<p>Cualquier duda o consulta, no dudes en contactarte.</p> <br>";
+  texto += "<p>Saludos,</p> <br>";
+  texto += "<p>Distribuidora Miler</p><br></div>"; 
+  //<br><br><img src='../../../assets/logomiler.png' /> https://stackoverflow.com/questions/5924072/express-js-cant-get-my-static-files-why
+
   var mailOptions = {
     from: 'ventas@miler.com.ar', // sender address
-    to: 'javibishop@gmail.com', // list of receivers
+    to: req.body.destinatario, // list of receivers
     cc: 'distribuidoramiler@gmail.com', // Comma separated list or an array
-    subject: 'test upgrde nodemailer subject', // Subject line
-    html: '<b>Hello world </b>' // html body
+    subject: 'Distribuidora Miler - Aviso de envio de pedido', // Subject line
+    html: texto // html body
 };
-  console.log(mailOptions);
+  //console.log(mailOptions);
   smtpTransport.sendMail(mailOptions, function(error, response){
    if(error){
           console.log(error);
       res.end("error");
    }else{
-          console.log("Message sent: " + response.message);
+          //console.log("Message sent: " + response.message);
       res.end("sent");
        }
   });
 });
 
-const router = express.Router();
 const product = require('./server/controllers/api/productos');
 router.get('/api/productos', product.getAll);
 router.post('/api/producto', product.create);
