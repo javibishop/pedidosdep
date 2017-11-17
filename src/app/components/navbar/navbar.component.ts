@@ -12,4 +12,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  obtenertoken(){
+    window.location.href = "https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=6048120304954368";
+  }
 }
