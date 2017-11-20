@@ -36,6 +36,3 @@ export interface IPedido {
     fechaenviado:Date,
     fecharecibido:Date
 }
-
-
-
