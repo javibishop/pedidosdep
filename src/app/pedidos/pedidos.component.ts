@@ -292,7 +292,7 @@ export class PedidosComponent implements OnInit {
       };
       
       var tooltip = 'Tel:' + pedido.telefono + '\n' + 'Nombre: ' + pedido.nombre + '\n' + 'Alta: ' + (pedido.fechaalta ?  pedido.fechaalta.slice(0,10) : '') + '\n' + 'Preparado: ' + (pedido.fechapreparado ? pedido.fechapreparado.slice(0,10) : '') + '\n' + 'Facturado: ' + (pedido.fechafacturado ? pedido.fechafacturado.slice(0,10) :  '')+ '\n' + 'Enviado: ' + (pedido.fechaenviado ? pedido.fechaenviado.slice(0,10) :  '')+ '\n' + 'Recibido: ' + (pedido.fecharecibido ? pedido.fecharecibido.slice(0,10) :  '') + '\n' + 'Finalizado: ' + (pedido.fechafinalizado ?  pedido.fechafinalizado.slice(0,10) :  '') ;
-      var dragula = new Dragula(pedido._id, pedido.envioidmercadolibre, pedido.id, pedido.nombre, pedido.numerooc, pedido.numerocliente, (pedido.pagosolicitadinero > 0), (pedido.envioadeuda  > 0), pedido.color1, tooltip);
+      var dragula = new Dragula(pedido._id, pedido.envioidmercadolibre, pedido.id, pedido.nombre, pedido.numerooc, pedido.numerocliente, (pedido.pagosolicitadinero > 0), (pedido.envioadeuda  > 0), pedido.color1, tooltip, pedido.envioforma);
       return dragula;
   }
 

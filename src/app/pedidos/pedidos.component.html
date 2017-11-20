@@ -174,8 +174,32 @@
                                     <label for="enviodireccion" class="col-sm-4 col-form-label">Direccion</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
                                             <input type="text" class="form-control" name="enviodireccion" id="enviodireccion" [(ngModel)]="pedidoInfo.enviodireccion" placeholder="Direccion de envio"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <label for="envioprovincia" class="col-sm-4 col-form-label">Provincia</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
+                                            <input type="text" class="form-control" name="envioprovincia" id="envioprovincia" [(ngModel)]="pedidoInfo.envioprovincia" placeholder="Provincia"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <label for="enviolocalidad" class="col-sm-4 col-form-label">Localidad</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
+                                            <input type="text" class="form-control" name="enviolocalidad" id="enviolocalidad" [(ngModel)]="pedidoInfo.enviolocalidad" placeholder="Localidad"/>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +271,19 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
                                             <input type="input" class="form-control" name="pagosolicitadinero" id="pagosolicitadinero" [(ngModel)]="pedidoInfo.pagosolicitadinero" placeholder="Monto de dinero solicitado"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <label for="costo" class="col-sm-4 col-form-label">Costo</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="input" class="form-control" name="envioacosto" id="envioacosto" [(ngModel)]="pedidoInfo.envioacosto" placeholder="Costo de Envio"/>
                                         </div>
                                     </div>
                                 </div>

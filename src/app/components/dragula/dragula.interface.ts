@@ -7,5 +7,6 @@ export interface IDragula{
     cliente: string,
     solicitadinero: boolean,
     tienedeuda: boolean,
-    estilo: any
+    estilo: any,
+    formaenvio: string,
 }

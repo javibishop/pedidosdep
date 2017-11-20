@@ -20,14 +20,14 @@ export class PrintcardComponent implements OnInit {
       var texto = '';
       switch(this.pedido.envioforma){
         case "1":
-          texto = '<div><h1>Impresion de pedido</h1>Nombre: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Horario: '+(this.pedido.enviohora ? this.pedido.enviohora : '-')+'<br><br> Deuda: '+(this.pedido.enviodeuda ? this.pedido.enviodeuda : '-')+'<br><br> Costo: '+this.pedido.envioacosto+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
+          texto = '<div><h1>Información de envio</h1>Destinatario: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Horario: '+(this.pedido.enviohora ? this.pedido.enviohora : '-')+'<br><br> Cobrar: '+(this.pedido.envioadeuda ? this.pedido.envioadeuda : '-')+'<br><br> Costo: '+this.pedido.envioacosto+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
         break;
         case "3":
         case "4":
-          texto = '<div><h1>Impresion de pedido</h1>Nombre: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Localidad: '+this.pedido.enviolocalidad+'<br><br> Provincia: '+this.pedido.envioprovincia+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
+          texto = '<div><h1>Información de envio</h1>Destinatario: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Localidad: '+this.pedido.enviolocalidad+'<br><br> Provincia: '+this.pedido.envioprovincia+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
         break;
-        case "5":
-          texto = '<div><h1>Impresion de pedido</h1>Nombre: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Sucursal: '+(this.pedido.enviosucursal ?this.pedido.enviosucursal : '') +'<br><br> Localidad: '+this.pedido.enviolocalidad+'<br><br> Provincia: '+this.pedido.envioprovincia+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
+        case "2":
+          texto = '<div><h1>Información de envio</h1>Destinatario: '+this.pedido.nombre+' <br><br> Direccion: '+this.pedido.enviodireccion+'<br><br> Sucursal: '+(this.pedido.enviosucursal ?this.pedido.enviosucursal : '') +'<br><br> Localidad: '+this.pedido.enviolocalidad+'<br><br> Provincia: '+this.pedido.envioprovincia+'<br><br> Telefono: '+this.pedido.telefono+'<br><br><img src="../../../assets/logomiler.png" /></div>';
         break;
       }
       let popupWinindow

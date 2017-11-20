@@ -12,6 +12,7 @@ export class Dragula {
         public solicitadinero: boolean,
         public tienedeuda: boolean,
         public estilo: any,
-        public tooltip: string
+        public tooltip: string,
+        public formaenvio: string
     ){}
 }
