@@ -37,6 +37,5 @@ export interface IPedido {
     fecharecibido:Date
 }
 
-var pedido = mongoose.model("Pedidos", pedido);
-module.exports = pedido;
+
 
