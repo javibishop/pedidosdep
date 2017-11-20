@@ -322,6 +322,10 @@ export class PedidosComponent implements OnInit {
     pedido2.enviosucursal= '',
     pedido2.envioadeuda= body.envioadeuda,
     pedido2.pagoforma= body.pagoforma,
+    pedido2.enviolocalidad = body.shipping.receiver_address ? (body.shipping.receiver_address.city ? body.shipping.receiver_address.city.name : '') : '',
+    pedido2.envioprovincia = body.shipping.receiver_address ? (body.shipping.receiver_address.state ? body.shipping.receiver_address.state.name : '') : '',
+    pedido2.enviocp = body.shipping.receiver_address ? (body.shipping.receiver_address.zip_code ? body.shipping.receiver_address.zip_code : '') : '',
+    pedido2.envioacosto = body.shipping.shipping_option ? (body.shipping.shipping_option.cost ? body.shipping.shipping_option.cost : 0) : 0,
     pedido2.pagoestado= '',
     pedido2.pagosolicitadinero = 0,
     pedido2.pagosolicitadinerocobrado = false 
@@ -354,6 +358,10 @@ export class PedidosComponent implements OnInit {
     pedido2.comentario= '',
     pedido2.envioidmercadolibre = 0;
     pedido2.envioforma= '1',
+    pedido2.enviolocalidad = '',
+    pedido2.envioprovincia= '',
+    pedido2.enviocp= '',
+    pedido2.envioacosto = 0,
     pedido2.enviodireccion=  '',
     pedido2.enviosucursal= '',
     pedido2.envioadeuda= 0,

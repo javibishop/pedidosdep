@@ -24,6 +24,11 @@ function mapearPedidoInterfazAPedidoMongo(iPedido){
 		enviodireccion: iPedido.enviodireccion,
 		enviosucursal: iPedido.enviosucursal,
 		envioadeuda: iPedido.envioadeuda,
+		enviolocalidad: iPedido.enviolocalidad,
+		envioprovincia: iPedido.envioprovincia,
+		enviocp: iPedido.enviocp,
+		envioacosto : iPedido.envioacosto,
+		enviohora: iPedido.enviohora,
 		pagoforma : iPedido.pagoforma,
 		pagoestado : iPedido.pagoestado,
 		pagosolicitadinero : iPedido.pagosolicitadinero,
@@ -65,14 +70,14 @@ var pedidos = {
 		console.log('actualizar');
 		Pedidos.findOneAndUpdate({_id: req.params.id}, req.body, function (err) {
 			if(err) return console.error(err);
-			console.log('actualizo!')
+			//console.log('actualizo!')
             res.sendStatus(200);
         })
 	},
 	delete: function(req, res, next){
 		Pedidos.findOneAndRemove({_id: req.params.id}, function(err) {
             if(err) return console.error(err);
-            res.sendStatus(200);
+            res.json({ estado: 'Ok', message: 'Pedido Eliminado!'});;
         });
 	},
 	

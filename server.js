@@ -45,12 +45,16 @@ app.use(function(req, res, next) {
 const router = express.Router();
 
 router.post('/api/sendmail',function(req,res){
-  var texto = "<div><p>Hola, ya enviamos tu pedido por la empresa "+req.body.comentario+", el numero de seguimiento es "+req.body.envionumeroguia+".</p> <br>"
-  texto += "<p>Podes realizar el seguimiento de tu envio ingresando al siguiente link seleccionando la empresa por la cual despachamos tu pedido.</p> <br>";
-  texto += "<p>http://www.distribuidoramiler.com.ar/seguimiento-de-envios_6xST</p> <br>";
-  texto += "<p>Cualquier duda o consulta, no dudes en contactarte.</p> <br>";
-  texto += "<p>Saludos,</p> <br>";
-  texto += "<p>Distribuidora Miler</p><br></div>"; 
+  var texto = "<div><p>Hola, ya enviamos tu pedido por la empresa "+req.body.comentario+", el numero de seguimiento es "+req.body.envionumeroguia+".</p>"
+  texto += "<p><a href='http://www.distribuidoramiler.com.ar/seguimiento-de-envios_6xST'>Podes realizar el seguimiento de tu envio presionando aqui y seleccionando la empresa por la cual despachamos tu pedido.</a></p>";
+  texto += "<p>Cualquier duda o consulta, no dudes en contactarte.</p>";
+  texto += "<p>Saludos,</p>";
+  texto += "<p><a href='www.distribuidoramiler.com.ar'>Distribuidora Miler</a></p>"; 
+  texto += "<p><a href='mailto:distribuidoramiler@gmail.com'>Correo Electronico</a></p>"; 
+  texto += "<p><a href='https://www.google.com/maps?q=Gral.+Jos%C3%A9+Gervasio+Artigas+1591,+CABA&entry=gmail&source=g'>Gral. José Gervasio Artigas 1591, CABA</a></p>"; 
+  texto += "<p>(011) 3535-5833 (rotativas)</p>"; 
+  texto += "<p>Lun. a Vie. de 9 a 13 y de 14 a 18 hs</p>"; 
+  texto += "<p>Sabados de 9 a 13 hs.</p></div>"; 
   //<br><br><img src='../../../assets/logomiler.png' /> https://stackoverflow.com/questions/5924072/express-js-cant-get-my-static-files-why
 
   var mailOptions = {
