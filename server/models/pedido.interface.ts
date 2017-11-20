@@ -17,6 +17,10 @@ export interface IPedido {
     envioforma: String,
     enviodireccion : String,
     enviohora : String,
+    enviolocalidad: String,
+    envioprovincia: String,
+    enviocp: String,
+    envioacosto : Number,
     enviosucursal : String,
     envioadeuda : Number,
     envionumeroguia: String,
@@ -32,3 +36,7 @@ export interface IPedido {
     fechaenviado:Date,
     fecharecibido:Date
 }
+
+var pedido = mongoose.model("Pedidos", pedido);
+module.exports = pedido;
+
