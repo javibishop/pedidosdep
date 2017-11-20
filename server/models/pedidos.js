@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 export interface IPedido {
     id : Number,
     fecha : Date,
