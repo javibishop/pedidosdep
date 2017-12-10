@@ -1,11 +1,11 @@
 
   <div id="topnav" class="pull-center">
       <div class="btn-group">
-          <button type="button" class="btn btn-outline-danger btn-filter mt-3 ml-1 mr-1" (click)="pendientes > 0 && iralistadopedido(1)" data-target="pendiente">Pendientes ({{pendientes}})</button>
-          <button type="button" class="btn btn-outline-warning btn-filter mt-3 ml-1 mr-1" (click)="apreparar > 0 && iralistadopedido(2)" data-target="apreparar">A Perapar ({{apreparar}})</button>
-          <button type="button" class="btn btn-outline-primary btn-filter mt-3 ml-1 mr-1" (click)="preparados > 0 && iralistadopedido(3)" data-target="preparados">Preparado ({{preparados}})</button>
-          <button type="button" class="btn btn-outline-success btn-filter mt-3 ml-1 mr-1" (click)="entregados > 0 && iralistadopedido(4)" data-target="entregados">Entregado ({{entregados}})</button>
-          <button type="button" class="btn btn-outline-info btn-filter mt-3 ml-1 mr-1" (click)="finalizados > 0 && iralistadopedido(5)" data-target="finalizados">Finalizado ({{finalizados}})</button>
+          <button type="button" class="btn btn-outline-danger btn-filter" (click)="pendientes > 0 && iralistadopedido(1)" data-target="pendiente">Pendientes ({{pendientes}})</button>
+          <button type="button" class="btn btn-outline-warning btn-filter" (click)="apreparar > 0 && iralistadopedido(2)" data-target="apreparar">A Perapar ({{apreparar}})</button>
+          <button type="button" class="btn btn-outline-primary btn-filter" (click)="preparados > 0 && iralistadopedido(3)" data-target="preparados">Preparado ({{preparados}})</button>
+          <button type="button" class="btn btn-outline-success btn-filter" (click)="entregados > 0 && iralistadopedido(4)" data-target="entregados">Entregado ({{entregados}})</button>
+          <button type="button" class="btn btn-outline-info btn-filter" (click)="finalizados > 0 && iralistadopedido(5)" data-target="finalizados">Finalizado ({{finalizados}})</button>
           <!-- https://bootsnipp.com/snippets/featured/easy-table-filter 
               https://getbootstrap.com/docs/4.0/utilities/spacing/#examples
           -->

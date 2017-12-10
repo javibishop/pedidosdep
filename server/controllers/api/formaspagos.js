@@ -1,11 +1,24 @@
 var Formaspagos = require('../../models/formaspagos');
-
+function mapear(fe){
+	var formapago = new Formaspagos({
+		id : fe.id,
+		nombre: fe.nombre,
+		color: fe.color
+	});
+	return formapago;
+};
 var formaspagos = {
 	
 	getAll: function(req, res, next){
 		Formaspagos.find(function(err, data){
 			if(err) console.error;
 			console.log('forma pagos getall!')
+			res.json(data);
+		});
+	},
+	find: function(req, res, next){
+		Formaspagos.find({'nombre': new RegExp(req.params.nombre, "i")},function(err, data){
+			if(err) console.error;
 			res.json(data);
 		});
 	},
@@ -16,7 +29,7 @@ var formaspagos = {
         })
 	},
 	create: function(req, res){
-		var obj = mapMLtopedido(req.body);
+		var obj = mapear(req.body);
 		obj.save(function(err, obj) {
             if(err) return console.error(err);
             res.status(200).json(obj);

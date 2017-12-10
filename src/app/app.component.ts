@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { PedidosService} from './services/pedidos.service';
+import { UsersService } from './services/users.service';
 import { FormasEnvioService} from './services/formasenvio.service';
 import { FormasPagosService} from './services/formaspagos.service';
 import { EstadosService } from './services/estados.service';
 import { AppGlobals } from "./app.global"
+import { Http, Response,RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [PedidosService, FormasEnvioService, FormasPagosService, EstadosService]
+  providers: [PedidosService, FormasEnvioService, FormasPagosService, EstadosService,UsersService]
 })
 export class AppComponent implements OnInit{
   title = 'Manejo de Pedidos ML';
-  constructor( private global: AppGlobals, private router:Router){
+  constructor( private global: AppGlobals, private router:Router, private http: Http){
   }
 
   ngOnInit() {
@@ -24,8 +27,17 @@ export class AppComponent implements OnInit{
     if(token){
       this.global.token = token;
     }
+
+    this.getcurf();
   }
   
+
+  getcurf() {
+    return this.http.get(this.global.serviceurl + 'api/getcurf')
+    .map((res:Response) => res.json()).subscribe(data => {
+      this.global.curf = data.csrfToken;
+    });
+  }
 
   getParameterByName(name, url) {
     if (!url) url = window.location.href;

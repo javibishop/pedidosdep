@@ -24,6 +24,9 @@ import { GpedidosxformaenvioComponent } from './components/gpedidosxformaenvio/g
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { AppGlobals } from './app.global';
+import { UserloginComponent } from './components/userlogin/userlogin.component';
+import { UsersingupComponent } from './components/usersingup/usersingup.component';
+import { PedidoeditorComponent } from './components/pedidoeditor/pedidoeditor.component';
 
 // https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407
 @NgModule({
@@ -41,7 +44,10 @@ import { AppGlobals } from './app.global';
     FormaspagosComponent,
     MenuestadosComponent,
     TruncatePipe,
-    GpedidosxformaenvioComponent
+    GpedidosxformaenvioComponent,
+    UserloginComponent,
+    UsersingupComponent,
+    PedidoeditorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,7 @@
-<div class="vertical-menu">
-  <a [class.active]="idformaenvioactivo==0">Formas de Envios</a>
-  <!-- <a *ngFor="let item of formasenvio" (click)="iralistadopedido(item.id)" [ngStyle]="setEstiloDiv(item.color)" [class.active]="item.id==idformaenvioactivo">{{item.nombre}} <span class="badge badge-default pull-right">{{item.cantidad}}</span></a> -->
-  <a *ngFor="let item of formasenvio" (click)="iralistadopedido(item.id, item.color)" [ngStyle]="item.id==idformaenvioactivo && setEstiloFormaEnvio(item.color)">{{item.nombre}} <span class="badge badge-default pull-right">{{item.cantidad}}</span></a>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="vertical-menu">
+            <a *ngFor="let item of formasenvio" (click)="iralistadopedido(item.id, item.color)" [ngStyle]="item.id==idformaenvioactivo && setEstiloFormaEnvio(item.color)">{{item.nombre}} <span class="badge badge-default pull-right" [ngStyle]="setEstiloFormaEnvio(item.color)">{{item.cantidad}}</span></a>
+          </div>
+    </div>
 </div>
-
-<!-- <div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 35%">
-    <span class="sr-only">35% Complete (success)</span>
-  </div>
-  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
-    <span class="sr-only">20% Complete (warning)</span>
-  </div>
-  <div class="progress-bar progress-bar-danger" style="width: 10%">
-    <span class="sr-only">10% Complete (danger)</span>
-  </div>
-</div> -->

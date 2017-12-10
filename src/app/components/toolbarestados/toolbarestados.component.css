@@ -6,8 +6,6 @@
     text-align: center;
 }
 
-
-
 #colorful-nav {
     padding-bottom: 0px;
     border: 1px transparent;
@@ -24,7 +22,7 @@
 #colorful-nav .navbar-nav {
     border-radius: 10px;
     float:none;
-    height: 160px;
+    height: 130px;
 }
 
 #colorful-nav .navbar-collapse {

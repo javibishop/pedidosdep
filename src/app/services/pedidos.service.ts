@@ -153,6 +153,11 @@ getPedidos(): Observable<Response> {
       .get(this.global.serviceurl + 'api/pedidos/pedidosporformaenviocount');
   }
 
+  getPedidoCountPorEstado(): Observable<Response> {  
+    return this.http
+      .get(this.global.serviceurl + 'api/pedidos/pedidosporestadocount');
+  }
+
   getPedidoCountPorFormaEnvioChart(): Observable<Response> {  
     return this.http
       .get(this.global.serviceurl + 'api/pedidos/pedidosporformaenviocountchart');
@@ -163,6 +168,11 @@ getPedidos(): Observable<Response> {
       .post(this.global.serviceurl + 'api/sendmail', JSON.parse(JSON.stringify(datos)));
   }
   //para en el post q el dato aparezca en el body, tienen que ir con JSON.parse(JSON.stringify(
+
+  buscar(valor){
+    return this.http
+    .get(this.global.serviceurl + 'api/pedidos/buscar/' + valor);
+  }
 }
 
  

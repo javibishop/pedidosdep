@@ -19,4 +19,29 @@ export class FormasEnvioService {
     return this.http
       .get(this.global.serviceurl + 'api/formasenvio');
   }
+
+  actualizar(formaenvio) {
+    var newJson = JSON.parse(JSON.stringify(formaenvio));
+    return this.http.put(this.global.serviceurl + 'api/formasenvio/' + newJson._id, newJson)
+  }
+
+  eliminar(_id){
+      return this.http.delete(this.global.serviceurl + 'api/formasenvio/' + _id)
+      .map((res:Response) => res.json());
+  }
+  grabar(formaenvio) {
+    var newJson = JSON.parse(JSON.stringify(formaenvio));
+    if(newJson._id){
+      return this.actualizar(newJson);
+    }
+    else{
+      return this.http.post(this.global.serviceurl + 'api/formasenvio', newJson)
+      .map((res:Response) => res.json());
+    }
+  }
+
+  buscar(nombre){
+    return this.http
+    .get(this.global.serviceurl + 'api/formasenvio/buscar/' + nombre);
+  }
 }

@@ -44,12 +44,12 @@ export class PedidosComponent implements OnInit {
   entregados=0;
   pendientes=0;
   nuevoPedido=false;
-  estado='';
-  envioforma='';
-  pagoforma='';
+  // estado='';
+  // envioforma='';
+  // pagoforma='';
   espedidomercadolibre = false;
   colorformaenvio:string;
-
+  curf:string;
   public dA :  IDragula[] = [];
   public dAPreparar :  IDragula[] = [];
   public dPreparado :  IDragula[] = [];
@@ -79,22 +79,21 @@ export class PedidosComponent implements OnInit {
     this.integradoConMercadoLibre = true;
     this.idFormaEnvioActual = 1;
     this.espedidomercadolibre = false;
-    this.getFormasEnvio();
-    this.getFormasPagos();
-    this.getEstados();
+    // this.getFormasEnvio();
+    // this.getFormasPagos();
+    // this.getEstados();
     this.obtenerPedidosPorFormaEnvio({id:1, color: 'red'});
-    
+    this.curf = this.global.curf;
     //this.colores   = [{value:'', label:'Sin Color'},{value:'red', label:'Rojo'},{value:'green', label:'Verde'},{value:'blue', label:'Azul'},{value:'yellow', label:'Amarillo'} ,{value:'orange', label:'Naranja'}];
   }
-
-  /*Se llama desde el modal de edicion o alta del pedido*/
-  grabarPedido(){
-    this.pedidosService.grabarPedido(this.pedidoInfo).subscribe(data => {
-      this.pedidoInfo = this.createPedido();
-      this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
-      });
-  }
   
+  pedidoGraboExito(){
+    this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
+  }
+
+  pedidoGraboError(){
+  }
+
   /*Cuando se edita desde dragula, levanta el modal de edicion*/
   editarPedidoEnModal(data){
     let event = new MouseEvent('click', {bubbles: true});
@@ -241,24 +240,6 @@ export class PedidosComponent implements OnInit {
     );
   }
 
-  getFormasEnvio(){
-    this.formaenvioService.getFormasEnvio().map(response => response.json()).subscribe((result: any) => {
-      this.formaenvio = result;
-    });
-  }
-
-  getFormasPagos(){
-    this.formasPagosService.getFormasPagos().map(response => response.json()).subscribe((result: any) => {
-      this.formapago = result;
-    });
-  }
-
-  getEstados(){
-    this.estadosService.getEstados().map(response => response.json()).subscribe((result: any) => {
-      this.estados = result;
-    });
-  }
-
   /*Obtiene la info del pedido de mercado libre, necesita token y nro de pedido ml*/
   getPedidoInfo(){
     if(this.integradoConMercadoLibre){
@@ -272,20 +253,11 @@ export class PedidosComponent implements OnInit {
         this.espedidomercadolibre = false;
       }
   }
-
-  selectestado(valor){
-    this.estado = valor;
-    this.pedidoInfo.estado = this.estado;
+  
+  obtenertoken(){
+    window.location.href = "https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=6048120304954368";
   }
-  selectenvioforma(valor){
-    this.envioforma = valor;
-    this.pedidoInfo.envioforma = this.envioforma;
-  }
-  selectpagoforma(valor){
-    this.pagoforma=valor;
-    this.pedidoInfo.pagoforma = this.pagoforma;
-  }
-
+ 
   mapToDragula(pedido) : IDragula{
       var estilo = {
         'background-color': 'red'

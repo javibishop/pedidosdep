@@ -173,6 +173,22 @@ var pedidos = {
 		})
 	},
 
+	getPedidoCountPorEstado: function(req, res, next){
+		Pedidos.aggregate(
+			// { 
+			// 	$match : {'estado': { $in: ['1','2','3','4'] }}
+			// },
+			{ 
+				$group : { 
+					 _id : "$estado", 
+					  total : { $sum : 1 } 
+				}
+			},function (err, obj) {
+            if(err) return console.error(err);
+            res.json(obj);
+		})
+	},
+
 	getPedidoCountPorFormaEnvioChart: function(req, res, next){
 		Pedidos.aggregate(
 			// { 
@@ -187,6 +203,23 @@ var pedidos = {
             if(err) return console.error(err);
             res.json(obj);
 		})
+	},
+	find: function(req, res, next){
+		var noesNumero = isNaN(req.params.valor);
+		if(noesNumero){
+			Pedidos.find({ $or:[ {'usuario': new RegExp(req.params.valor, "i")}, {'nombre':new RegExp(req.params.valor, "i")} ]}
+			,function(err, data){
+				if(err) console.error;
+				res.json(data);
+			});
+		}
+		else{
+			Pedidos.find({id: req.params.valor}, function (err, obj) {
+				if(err) return console.error(err);
+				res.json(obj);
+			})
+		}
+		
 	},
 }
 

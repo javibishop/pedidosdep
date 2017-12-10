@@ -1,4 +1,7 @@
-<div class="vertical-menu">
-  <a [class.active]="idEstado==0">Estados</a>
-  <a *ngFor="let item of estados" (click)="pedidosPorEstado(item.id)" [class.active]="item.id==idEstado">{{item.nombre}}</a>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="vertical-menu">
+            <a *ngFor="let item of estados" (click)="getPedidosPorEstado(item.id)" [class.active]="item.id==idEstado">{{item.nombre}}<span class="badge badge-default pull-right" [ngStyle]="setEstiloFormaEnvio(item.color)">{{item.cantidad}}</span></a>
+          </div>
+    </div>
 </div>

@@ -1,3 +1,122 @@
-<p>
-  formaenvio works!
-</p>
+<button hidden="hidden" type="button"   #buttonModalEdit data-toggle="modal" data-target="#exampleModal"></button>
+<!-- https://www.w3schools.com/bootstrap/bootstrap_modal.asp -->
+<div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form id="formeditor" class="form-horizontal" (submit)="grabarFormaEnvio()">
+                  <div class="modal-body">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="form-group row">
+                                      <label for="id" class="col-sm-4 col-form-label">Nombre</label>
+                                      <div class="form-group col-sm-8">
+                                          <div class="input-group">
+                                              <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
+                                              <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="formaenvio.nombre" placeholder="Nombre"/>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group row">
+                                    <label for="id" class="col-sm-4 col-form-label">Color</label>
+                                    <div class="form-group col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
+                                            <input type="text" class="form-control" name="color" id="color" [(ngModel)]="formaenvio.color" placeholder="Color"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" #buttonModaleditorCancel data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary btn-sm" onclick=" $('#editorModal').modal('hide');">Guardar</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>    
+
+
+<div class="mail-box">
+    <aside class="sm-side">
+        <div class="user-head">
+            <div class="user-name">
+                <h5><a href="#">Estados del Pedido</a></h5>
+            </div>
+            <a class="mail-dropdown pull-right" href="javascript:;">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+        <div class="inbox-body">
+            <a href="#exampleModal" data-toggle="modal" title="Agregar" class="btn btn-compose" (click)="limpiarFormaPago()">
+                Agregar
+            </a>
+        </div>
+        <div class="inbox-nav inbox-divider">
+            
+        </div>
+    </aside>
+    <aside class="lg-side">
+        <div class="inbox-head">
+            <h3>{{titulo}}</h3>
+            <form action="#" class="pull-right position">
+                <div class="input-append">
+                    <input type="text" class="sr-input" id="nombrebuscar" name="nombrebuscar" [(ngModel)]="nombrebuscar" placeholder="Buscar Forma de Envio">
+                    <button class="btn sr-btn" type="button" (click)="buscarFormaPago()"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="inbox-body">
+            <div class="mail-option">
+                <button type="button" (click)="getFormasEnvio()" class="btn-sm btn mini tooltips"><i class="fa fa-refresh"></i></button>
+                <ul class="unstyled inbox-pagination">
+                    <li><span>1-50 of 234</span></li>
+                    <li>
+                        <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                    </li>
+                    <li>
+                        <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                    </li>
+                </ul>
+          </div>
+          <table class="table table-inbox table-hover">
+              <thead>
+                  <tr class="unread">
+                      <th class="view-message text-center" style="width: 84%;">Nombre</th>  
+                      <th class="view-message text-center" style="width: 10%;">Color</th>  
+                      <th class="view-message text-center" style="max-width:3%;"></th>
+                      <th class="view-message text-center" style="max-width:3%;"></th>
+                  </tr>
+              </thead>
+              <tbody *ngFor='let formaenvio of formasenvios'>
+                  <tr class="small">  
+                      <td class="view-message text-center">{{formaenvio.nombre}}</td>
+                      <td class="view-message text-center">{{formaenvio.color}}</td>
+                      <td class="inbox-small-cells" style="max-width:10px;">
+                        <a class="btn-floating btn-sm purple-gradient"><i class="fa fa-pencil" (click)="editarFormaEnvio(formaenvio._id)" aria-hidden="true" rel="tooltip" title="Modificar Forma de Envio"></i></a>
+                      </td>
+                      <td class="inbox-small-cells" style="max-width:10px;">
+                          <a class="btn-floating btn-sm purple-gradient"><i class="fa fa-trash" aria-hidden="true" rel="tooltip" title="Eliminar Forma de Envio"></i></a>
+                      </td>
+                      <!-- (click)="eliminarFormaEnvio(formaenvio._id)" -->
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+    </aside>
+</div>

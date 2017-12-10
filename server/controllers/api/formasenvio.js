@@ -1,11 +1,26 @@
 var FormasEnvio = require('../../models/formasenvio');
 
+function mapear(fe){
+	var formaenvio = new FormasEnvio({
+		id : fe.id,
+		nombre: fe.nombre,
+		color: fe.color
+	});
+	return formaenvio;
+};
+
 var formasenvio = {
 	
 	getAll: function(req, res, next){
 		FormasEnvio.find(function(err, data){
 			if(err) console.error;
 			console.log('forma envio getall!')
+			res.json(data);
+		});
+	},
+	find: function(req, res, next){
+		FormasEnvio.find({'nombre': new RegExp(req.params.nombre, "i")},function(err, data){
+			if(err) console.error;
 			res.json(data);
 		});
 	},
@@ -16,7 +31,7 @@ var formasenvio = {
         })
 	},
 	create: function(req, res){
-		var obj = mapMLtopedido(req.body);
+		var obj = mapear(req.body);
 		obj.save(function(err, obj) {
             if(err) return console.error(err);
             res.status(200).json(obj);

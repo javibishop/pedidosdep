@@ -6,16 +6,23 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PedidosComponent } from 'app/pedidos/pedidos.component';
+import { FormaenvioComponent } from 'app/formaenvio/formaenvio.component';
+import { FormaspagosComponent } from 'app/formaspagos/formaspagos.component';
 import { PedidoslistaComponent } from 'app/pedidoslista/pedidoslista.component';
 import { GpedidosxformaenvioComponent } from 'app/components/gpedidosxformaenvio/gpedidosxformaenvio.component';
-//import { DogListComponent } from './dogs/dog-list.component';
+import { UserloginComponent } from 'app/components/userlogin/userlogin.component';
+import { UsersingupComponent } from 'app/components/usersingup/usersingup.component';
 
 // Route Configuration
 export const routes: Routes = [
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidoslista', component: PedidoslistaComponent },
   { path: 'pedidoslista/:estado', component: PedidoslistaComponent },
-  { path: 'gpedidosxformaenvio', component: GpedidosxformaenvioComponent }
+  { path: 'gpedidosxformaenvio', component: GpedidosxformaenvioComponent },
+  { path: 'formasenvio', component: FormaenvioComponent },
+  { path: 'formaspago', component: FormaspagosComponent },
+  { path: 'login', component: UserloginComponent },
+  { path: 'singup', component: UsersingupComponent }
   
   //,{ path: 'dogs', component: DogListComponent }
 ];

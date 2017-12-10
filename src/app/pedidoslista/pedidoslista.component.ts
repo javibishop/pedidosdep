@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter,Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit,EventEmitter,Renderer, Output, ElementRef, ViewChild } from '@angular/core';
 import { PedidosService } from '../services/pedidos.service';
 import {ActivatedRoute} from '@angular/router';
 import {PrintcardComponent} from '../components/printcard/printcard.component'
@@ -26,7 +26,6 @@ export class PedidoslistaComponent implements OnInit {
   estado = 0;
   pedidoInfo : any;
   estados= [];
-  formapago= [];
   formasenvios = [];
   nrofactura : string;
   envionumeroguia : string;
@@ -34,7 +33,8 @@ export class PedidoslistaComponent implements OnInit {
   comentario: string;
   idformaenvio: 0;
   token = "";
-
+  pedidosPorEstadosCount = [];
+  valorbuscar:string;
   constructor(private pedidosService: PedidosService, private route:ActivatedRoute, private renderer: Renderer, private formasEnvioService: FormasEnvioService,private formasPagosService: FormasPagosService,
     private estadosService: EstadosService, private toasterService: ToasterService) { 
   }
@@ -51,11 +51,11 @@ export class PedidoslistaComponent implements OnInit {
     this.comentario = '';
     this.nrofactura = '';
     this.envionumeroguia = '';
-    
+    this.valorbuscar = '';
     this.estado = Number(this.estado);
     this.estadoNombre ='en todos los Estados';
     this.getFormasEnvio();
-    this.getFormasPagos();
+    // this.getFormasPagos();
     this.getEstados();
     this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
   }
@@ -67,11 +67,17 @@ export class PedidoslistaComponent implements OnInit {
       timeout: 0,
       positionClass:'toast-center'
   });
-  
+  /*
+  1-pedidos por estado para la lista.
+  2-estados con contador.
+  3-actualizar contador por cada grabar de un pedido.
+   */
   getPedidos(estado){
     this.estadoNombre = estado.nombre;
+    this.estado = estado.idestado;
     this.pedidosService.getPedidoPorEstadoyformaenvio(estado.idestado, this.idformaenvio).map(response => response.json()).subscribe((result: any) => {
       this.pedidos = result;
+      this.getPedidoCountPorFormaEnvio();
     });
   }
 
@@ -81,12 +87,6 @@ export class PedidoslistaComponent implements OnInit {
     });
   }
   
-  getFormasPagos(){
-    this.formasPagosService.getFormasPagos().map(response => response.json()).subscribe((result: any) => {
-      this.formapago = result;
-    });
-  }
-
   getEstados(){
     this.estadosService.getEstados().map(response => response.json()).subscribe((result: any) => {
       this.estados = result;
@@ -97,8 +97,23 @@ export class PedidoslistaComponent implements OnInit {
     });
   }
   
+     /*Obtiene el group de pedidos por forma de envio para mostrar en la toolbar de envios*/
+    getPedidoCountPorFormaEnvio(){
+      this.pedidosService.getPedidoCountPorEstado().map(response => response.json()).subscribe((result: any) => {
+        this.pedidosPorEstadosCount = result
+      });
+    }
+
   setEstiloFormaEnvio(idformaenvio){
     var fe = this.formasenvios.find(x => x.id == idformaenvio);
+    return {
+      'color': fe.color
+      //'border-top-color': fe.color
+    }
+  }
+
+  setEstiloEstado(estado){
+    var fe = this.estados.find(x => x.id == parseInt(estado) );
     return {
       'background-color': fe.color
     }
@@ -116,6 +131,13 @@ export class PedidoslistaComponent implements OnInit {
     this.pedidoInfo = this.pedidos.find(x => x._id == data);
     let event = new MouseEvent('click', {bubbles: true});
     this.renderer.invokeElementMethod(this.buttonModalEdit.nativeElement, 'dispatchEvent', [event]);
+  }
+
+  pedidoGraboExito(){
+    this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
+  }
+
+  pedidoGraboError(){
   }
 
   modalFacturar(data){
@@ -178,17 +200,7 @@ export class PedidoslistaComponent implements OnInit {
     this.renderer.invokeElementMethod(this.buttonModalFacturarCancel.nativeElement, 'dispatchEvent', [event])
   }
 
-  grabarPedido(){
-    this.pedidosService.grabarPedido(this.pedidoInfo)
-    .subscribe((data)=> {
-      this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
-    },
-    (err)=>{
-      console.log(`Oops, an error occurred`);
-      console.log(`Error: ${err}`);
-    })
-    this.renderer.invokeElementMethod(this.buttonModalCancel.nativeElement, 'dispatchEvent', [event])
-  }
+  
   // http://codeseven.github.io/toastr/demo.html
   eliminarPedido(_id){
     this.pedidosService.eliminarPedido(_id)
@@ -202,13 +214,13 @@ export class PedidoslistaComponent implements OnInit {
     })
   }
 
-  selectestado(valor){
-    this.pedidoInfo.estado = valor;
+  buscarPedido(){
+    this.pedidosService.buscar(this.valorbuscar).map(response => response.json()).subscribe((result: any) => {
+      this.pedidos = result;
+    });
   }
-  selectenvioforma(valor){
-    this.pedidoInfo.envioforma = valor;
-  }
-  selectpagoforma(valor){
-        this.pedidoInfo.pagoforma = valor;
+
+  refreshPedidos(){
+    this.getPedidos({idestado: this.estado, nombre: this.estadoNombre, idformaenvio: this.idformaenvio});
   }
 }

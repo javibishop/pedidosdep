@@ -1,244 +1,26 @@
-<button hidden="hidden" type="button"   #buttonModalEdit data-toggle="modal" data-target="#exampleModal"> Agregar Pedido </button>
+<!-- https://bootsnipp.com/snippets/y8N7V -->
+
 <button hidden="hidden" type="button"   #buttonModalFacturar data-toggle="modal" data-target="#facturarModal"></button>
 <button hidden="hidden" type="button"  #buttonModalEnviar data-toggle="modal" data-target="#enviarModal"></button>
-<form id="formeditpedido" class="form-horizontal" (submit)="grabarPedido()">
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ingreso de Pedido</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form class="form-horizontal" (submit)="grabarPedido()">
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="id" class="col-sm-4 col-form-label">Pedido ML</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="id" id="id" [(ngModel)]="pedidoInfo.id" placeholder="Nùmero pedido de Mercado Libre"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="clientenro" class="col-sm-4 col-form-label">Cliente</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="clientenro" id="clientenro" [(ngModel)]="pedidoInfo.numerocliente" placeholder="Cliente de facturación"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="ordencompranro" class="col-sm-4 col-form-label">OC</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="ordencompranro" id="ordencompranro" [(ngModel)]="pedidoInfo.numerooc" placeholder="Nùmero de Orden de Compra"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="estado" class="col-sm-4 col-form-label">Estado</label>
-                                            <div class="col-sm-8">
-                                                <select name="estado" [ngModel]="pedidoInfo.estado || null" class="form-control input-xs" (change)="selectestado($event.target.value)">
-                                                    <option *ngFor="let value of estados" [attr.value]="value.id">{{value.nombre}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="pedidoInfo.nombre" placeholder="Nombre del comprador"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="usuario" class="col-sm-4 col-form-label">Usuario</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="usuario" id="usuario" [(ngModel)]="pedidoInfo.usuario" placeholder="Usuario"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                    <label for="enviodireccion" class="col-sm-2 col-form-label">Email</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
-                                                            <input type="text" class="form-control" name="mail" id="mail" [(ngModel)]="pedidoInfo.mail" placeholder="Direccion de email"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="formaenvio" class="col-sm-4 col-form-label">Forma Envio</label>
-                                            <div class="col-sm-8">
-                                                <select name="formaenvio" [ngModel]="pedidoInfo.envioforma || null" class="form-control input-xs" (change)="selectenvioforma($event.target.value)">
-                                                    <option *ngFor="let value of formaenvio" [attr.value]="value.id">{{value.nombre}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="enviodireccion" class="col-sm-4 col-form-label">Direccion</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="enviodireccion" id="enviodireccion" [(ngModel)]="pedidoInfo.enviodireccion" placeholder="Direccion de envio"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="enviosucursal" class="col-sm-4 col-form-label">Sucursal</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="enviosucursal" id="enviosucursal" [(ngModel)]="pedidoInfo.enviosucursal" placeholder="Direccion de Sucursal"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="telefono" class="col-sm-4 col-form-label">Telefono</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="telefono" id="telefono" [(ngModel)]="pedidoInfo.telefono" placeholder="Telefono"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="enviohora" class="col-sm-4 col-form-label">Horario</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="enviohora" id="enviohora" [(ngModel)]="pedidoInfo.enviohora" placeholder="Horario de envio"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="envioadeuda" class="col-sm-4 col-form-label">Deuda</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
-                                                    <input type="input" class="form-control" name="envioadeuda" id="envioadeuda" [(ngModel)]="pedidoInfo.envioadeuda" placeholder="Deuda del pedido"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="formapago" class="col-sm-4 col-form-label">Forma Pago</label>
-                                            <div class="col-sm-8">
-                                                <select name="formapago" [ngModel]="pedidoInfo.pagoforma || null"  class="form-control input-xs" (change)="selectpagoforma($event.target.value)">
-                                                    <option *ngFor="let value of formapago" [attr.value]="value.id" >{{value.nombre}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="pagosolicitadinero" class="col-sm-4 col-form-label">Sol. Dinero</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
-                                                    <input type="input" class="form-control" name="pagosolicitadinero" id="pagosolicitadinero" [(ngModel)]="pedidoInfo.pagosolicitadinero" placeholder="Monto de dinero solicitado"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="id" class="col-sm-4 col-form-label">Nro Guia</label>
-                                            <div class="col-sm-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="envionumeroguia" id="envionumeroguia" [(ngModel)]="pedidoInfo.envionumeroguia" placeholder="Nùmero de guia"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group row">
-                                            <label for="clientenro" class="col-sm-4 col-form-label"></label>
-                                            <div class="col-sm-8">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group row">
-                                            <label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
-                                                    <textarea class="form-control" name="comentario" id="comentario" [(ngModel)]="pedidoInfo.comentario" placeholder="Comentario"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-sm" #buttonModalCancel data-dismiss="modal">Cancelar</button>
-                            <button  type="submit" class="btn btn-primary btn-sm" onclick="$('#exampleModal').modal('hide')">Guardar</button>
-                        </div>
-                    </div>
-                </form>
-                </div>
+
+<button hidden="hidden" type="button"   #buttonModalEdit data-toggle="modal" data-target="#exampleModal"> Agregar Pedido </button>
+<!-- https://www.w3schools.com/bootstrap/bootstrap_modal.asp -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edicion de Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <app-pedidoeditor [pedidoAEditar]="pedidoInfo" (gabroPedidoExito)="pedidoGraboExito($event)" (gabroPedidoError)="getPedidos($event)"></app-pedidoeditor>
+            </div>
+        </div>
     </div>
-</form>
+</div>    
+
 <div class="modal fade" id="facturarModal" tabindex="-2" role="dialog" aria-labelledby="facturaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -325,86 +107,182 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-        </div>
-    </div>
-    <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <app-menuestados [estadoActual]=estado (cambioEstado)="getPedidos($event)"></app-menuestados>
-      </div>
-      <div class="col-lg-10">
-        <div class="card">
-            <div class="card-header">
-                Pedidos {{estadoNombre}}
+
+<div class="mail-box">
+    <aside class="sm-side">
+        <div class="user-head">
+            <div class="user-name">
+                <h5><a href="#">Estados del Pedido</a></h5>
             </div>
-            <div class="card-body">
-                <div class="container">  
-                    <div class="row">  
-                        <div class="center-block">  
-                            <table class="table" data-row-style="rowStyle" id="editable">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center;min-width: 80px;">Pedido</th>  
-                                        <th style="text-align: center;min-width: 130px;">Comprador</th>  
-                                        <th style="text-align: center;min-width: 80px;">Cliente</th>
-                                        <th style="text-align: center;min-width: 80px;">OC</th>
-                                        <th style="text-align: center;min-width: 130px;">Telefono</th>
-                                        <th style="text-align: center;min-width: 60px;">Facturado</th>
-                                        <th style="text-align: center;min-width: 80px;">Factura</th>
-                                        <th style="text-align: center;min-width: 130px;">Guia</th>
-                                        <th style="width:10px;"></th>
-                                        <th style="max-width:10px;"></th>
-                                        <th style="max-width:10px;"></th>
-                                        <th style="max-width:10px !important;"></th>
-                                        <th style="max-width:10px !important;"></th>
-                                    </tr>
-                                </thead>
-                                <!--Iterate through an observableArray using foreach-->
-                                <tbody *ngFor='let pedido of pedidos'>
-                                    <tr class="small" [ngStyle]="pedido.envioforma && setEstiloFormaEnvio(pedido.envioforma)">
-                                        <td>{{pedido.id}}</td>
-                                        <td>{{pedido.nombre}}</td>
-                                        <td>{{pedido.numerocliente}}</td>
-                                        <td>{{pedido.numerooc}}</td>
-                                        <td>{{pedido.telefono}}</td>
-                                        <td>{{pedido.facturado}}</td>
-                                        <td>{{pedido.numerofactura}}</td>
-                                        <td>{{pedido.envionumeroguia}}</td>
-                                        <td style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-pencil" (click)="updatePedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Modificar pedido"></i></a>
-                                        <td style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-trash" (click)="eliminarPedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Eliminar pedido"></i></a>
-                                        <td style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-print" (click)="imprimirPedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
-                                        <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-money" (click)="modalFacturar(pedido._id)" aria-hidden="true" rel="tooltip" title="Facturar pedido"></i></a>
-                                        <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-paper-plane-o" (click)="modalEnviar(pedido._id)" aria-hidden="true" rel="tooltip" title="Enviar pedido"></i></a>
-                                        <td style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-id-card-o" *ngIf="pedido.envioidmercadolibre > 0" (click)="imprimirEtiquetaML(pedido.envioidmercadolibre)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta Mercado Libre"></i></a><td>
-                                    </tr>
-                                    <!-- <div class="btn-group">
-                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Acciones sobre el pedido
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <button type="button" class="btn btn-outline-default"><span class="btn-label"><i class="fa fa-print" (click)="imprimirPedido(pedido._id)" aria-hidden="true"></i></span> Imprimir</button>
-                                                <button type="button" class="btn btn-outline-default"><span class="btn-label"><i class="fa fa-pencil" (click)="updatePedido(pedido._id)" aria-hidden="true"></i></span> Modificar</button>
-                                                <button type="button" class="btn btn-outline-default"><span class="btn-label"><i class="fa fa-money" (click)="modalFacturar(pedido._id)" aria-hidden="true"></i></span> Facturar</button>
-                                                <button type="button" class="btn btn-outline-default"><span class="btn-label"><i class="fa fa-trash" (click)="eliminarPedido(pedido._id)" aria-hidden="true"></i></span> Eliminar</button>
-                                                <button type="button" class="btn btn-outline-default"><span class="btn-label"><i class="fa fa-id-card-o" *ngIf="pedido.envioidmercadolibre > 0" (click)="imprimirEtiquetaML(pedido.envioidmercadolibre)" aria-hidden="true"></i></span> >Imprimir Etiqueta</button>
-                                            </div>
-                                            </div> -->
-                                </tbody>
-                                <tfoot>
-                                </tfoot>
-                            </table>
+            <a class="mail-dropdown pull-right" href="javascript:;">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+        <div class="inbox-body">
+            <a href="#myModal" data-toggle="modal"  title="Compose"    class="btn btn-compose">
+                Compose
+            </a>
+            <!-- <button type="button"   #buttonModalEdit data-toggle="modal" class="btn" data-target="#myModal"> Agregar Pedido </button> -->
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                            <h4 class="modal-title">Compose</h4>
                         </div>
-                    </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">To</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="" id="inputEmail1" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Cc / Bcc</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="" id="cc" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Subject</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="" id="inputPassword1" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Message</label>
+                                    <div class="col-lg-10">
+                                        <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <span class="btn green fileinput-button">
+                                        <i class="fa fa-plus fa fa-white"></i>
+                                        <span>Attachment</span>
+                                        <input type="file" name="files[]" multiple>
+                                        </span>
+                                        <button class="btn btn-send" type="submit">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+        <div class="inbox-nav inbox-divider">
+            <app-menuestados [estadoActual]=estado (cambioEstado)="getPedidos($event)" [pedidosPorEstado]="pedidosPorEstadosCount"></app-menuestados>
+        </div>
+    </aside>
+    <aside class="lg-side">
+        <div class="inbox-head">
+            <h3>{{titulo}}</h3>
+            <form action="#" class="pull-right position">
+                <div class="input-append">
+                    <input type="text" class="sr-input" id="valorbuscar" name="valorbuscar" [(ngModel)]="valorbuscar" placeholder="Buscar Pedido">
+                    <button class="btn sr-btn" type="button" (click)="buscarPedido()"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="inbox-body">
+        <div class="mail-option">
+            <div class="chk-all">
+                <input type="checkbox" class="mail-checkbox mail-group-checkbox">
+                <div class="btn-group">
+                    <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+                        All
+                        <i class="fa fa-angle-down "></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"> None</a></li>
+                        <li><a href="#"> Read</a></li>
+                        <li><a href="#"> Unread</a></li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="btn-group">
+                <button type="button" (click)="refreshPedidos()" class="btn-sm btn mini tooltips"><i class="fa fa-refresh"></i></button>
+            </div>
+            <div class="btn-group hidden-phone">
+                <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+                    More
+                    <i class="fa fa-angle-down "></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                    <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a data-toggle="dropdown" href="#" class="btn mini blue">
+                    Move to
+                    <i class="fa fa-angle-down "></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                    <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                </ul>
+            </div>
+
+            <ul class="unstyled inbox-pagination">
+                <li><span>1-50 of 234</span></li>
+                <li>
+                    <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                </li>
+                <li>
+                    <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                </li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </div>
-<div class="row" >
-    <app-printcard></app-printcard>
+            <table class="table table-inbox table-hover">
+                <thead>
+                    <tr class="unread">
+                        <th class="view-message text-center" style="min-width: 80px;">Pedido</th>  
+                        <th class="view-message text-center" style="min-width: 130px;">Comprador</th>  
+                        <th class="view-message text-center" style="min-width: 80px;">Cliente</th>
+                        <th class="view-message text-center" style="min-width: 80px;">OC</th>
+                        <th class="view-message text-center" style="min-width: 130px;">Telefono</th>
+                        <th class="view-message text-center" style="min-width: 60px;">Facturado</th>
+                        <th class="view-message text-center" style="min-width: 80px;">Factura</th>
+                        <th class="view-message text-center" style="min-width: 130px;">Guia</th>
+                        <th class="view-message text-center" style="width:10px;"></th>
+                        <th class="view-message text-center" style="width:10px;"></th>
+                        <th class="view-message text-center" style="width:10px;"></th>
+                        <th class="view-message text-center" style="width:10px !important;"></th>
+                        <th class="view-message text-center" style="width:10px !important;"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor='let pedido of pedidos'>
+                    <!-- ver de poner el color del borde de la row con el color del estado -->
+                    <tr class="small" [ngStyle]="pedido.estado && setEstiloEstado(pedido.estado)">  
+                        <td class="view-message text-center" [ngStyle]="pedido.envioforma && setEstiloFormaEnvio(pedido.envioforma)">{{pedido.id}}</td>
+                        <td class="view-message text-center">{{pedido.nombre}}</td>
+                        <td class="view-message text-center">{{pedido.numerocliente}}</td>
+                        <td class="view-message text-center">{{pedido.numerooc}}</td>
+                        <td class="view-message text-center">{{pedido.telefono}}</td>
+                        <td class="view-message text-center">{{pedido.facturado}}</td>
+                        <td class="view-message text-center">{{pedido.numerofactura}}</td>
+                        <td class="view-message text-center">{{pedido.envionumeroguia}}</td>
+                        <td class="inbox-small-cells" style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-pencil" (click)="updatePedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Modificar pedido"></i></a>
+                        <td class="inbox-small-cells" style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-trash" (click)="eliminarPedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Eliminar pedido"></i></a>
+                        <td class="inbox-small-cells" style="max-width:10px;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-print" (click)="imprimirPedido(pedido._id)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta de envio"></i></a>
+                        <td class="inbox-small-cells" style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-money" (click)="modalFacturar(pedido._id)" aria-hidden="true" rel="tooltip" title="Facturar pedido"></i></a>
+                        <td class="inbox-small-cells" style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-paper-plane-o" (click)="modalEnviar(pedido._id)" aria-hidden="true" rel="tooltip" title="Enviar pedido"></i></a>
+                        <td class="inbox-small-cells" style="max-width:10px !important;"><a class="btn-floating btn-sm purple-gradient"><i class="fa fa-id-card-o" *ngIf="pedido.envioidmercadolibre > 0" (click)="imprimirEtiquetaML(pedido.envioidmercadolibre)" aria-hidden="true" rel="tooltip" title="Imprimir etiqueta Mercado Libre"></i></a><td>
+                    </tr>
+                </tbody>
+                <tbody>
+            </tbody>
+            </table>
+        </div>
+    </aside>
 </div>
-<div><toaster-container [toasterconfig]="toasterconfig">
-    </toaster-container></div>
