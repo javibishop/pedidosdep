@@ -15,7 +15,7 @@ import { AppGlobals } from "../app.global"
   styleUrls: ['./pedidos.component.css']
 })
 export class PedidosComponent implements OnInit {
-  @ViewChild('buttonModalEdit') buttonModalEdit:ElementRef;
+  @ViewChild('buttonModalEdit2') buttonModalEdit:ElementRef;
   @ViewChild('buttonModalCancel') buttonModalCancel:ElementRef;
 
   integradoConMercadoLibre = true;
@@ -87,6 +87,9 @@ export class PedidosComponent implements OnInit {
     //this.colores   = [{value:'', label:'Sin Color'},{value:'red', label:'Rojo'},{value:'green', label:'Verde'},{value:'blue', label:'Azul'},{value:'yellow', label:'Amarillo'} ,{value:'orange', label:'Naranja'}];
   }
   
+  limpiarPedido(){
+    this.pedidoInfo = this.createPedido();
+  }
   pedidoGraboExito(){
     this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
   }
@@ -293,6 +296,9 @@ export class PedidosComponent implements OnInit {
     pedido2.enviodireccion= body.shipping.receiver_address ? (body.shipping.receiver_address.address_line ? body.shipping.receiver_address.address_line : '') : '',
     pedido2.enviosucursal= '',
     pedido2.envioadeuda= body.envioadeuda,
+    pedido2.enviobultos=1,
+    pedido2.enviobarrio = body.enviobarrio,
+    pedido2.enviocp = body.enviocp,
     pedido2.pagoforma= body.pagoforma,
     pedido2.enviolocalidad = body.shipping.receiver_address ? (body.shipping.receiver_address.city ? body.shipping.receiver_address.city.name : '') : '',
     pedido2.envioprovincia = body.shipping.receiver_address ? (body.shipping.receiver_address.state ? body.shipping.receiver_address.state.name : '') : '',
@@ -333,10 +339,12 @@ export class PedidosComponent implements OnInit {
     pedido2.enviolocalidad = '',
     pedido2.envioprovincia= '',
     pedido2.enviocp= '',
+    pedido2.enviobarrio= '',
     pedido2.envioacosto = 0,
     pedido2.enviodireccion=  '',
     pedido2.enviosucursal= '',
     pedido2.envioadeuda= 0,
+    pedido2.enviobultos=0,
     pedido2.pagoforma = '1',
     pedido2.pagoestado = '',
     pedido2.pagosolicitadinero = 0,
