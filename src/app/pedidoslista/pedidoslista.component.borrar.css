@@ -1,0 +1,10 @@
+  #th{
+    text-align: center !important;
+  }
+.card-header{
+    background-color:darkgrey;
+    margin-top: 10px;
+}
+.card-body{
+    width: 100%;
+}

@@ -19,6 +19,7 @@ body{font-family: 'Open Sans', sans-serif;}
   display: table;
   table-layout: fixed;
   width: 100%;
+  height: 90%;
 }
 .mail-box aside {
   display: table-cell;
@@ -113,6 +114,8 @@ ul.inbox-nav {
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .inbox-divider {
   border-bottom: 1px solid #d5d8df;
@@ -135,7 +138,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 }
 ul.inbox-nav li a i {
   color: #6a6a6a;
-  font-size: 16px;
+  font-size: 12px;
   padding-right: 10px;
 }
 ul.inbox-nav li a span.label {
@@ -143,7 +146,7 @@ ul.inbox-nav li a span.label {
 }
 ul.labels-info li h4 {
   color: #5c5c5e;
-  font-size: 13px;
+  font-size: 10px;
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 5px;

@@ -1,4 +1,12 @@
 var Estados = require('../../models/estados');
+function mapear(fe){
+	var estado = new Estados({
+		id : fe.id,
+		nombre: fe.nombre,
+		color: fe.color
+	});
+	return estado;
+};
 
 var estados = {
 	
@@ -9,6 +17,12 @@ var estados = {
 			res.json(data);
 		});
 	},
+	find: function(req, res, next){
+		Estados.find({'nombre': new RegExp(req.params.nombre, "i")},function(err, data){
+			if(err) console.error;
+			res.json(data);
+		});
+	},
 	read: function(req, res, next){
 		Estados.findOne({_id: req.params.id}, function (err, obj) {
             if(err) return console.error(err);
@@ -16,7 +30,7 @@ var estados = {
         })
 	},
 	create: function(req, res){
-		var obj = mapMLtopedido(req.body);
+		var obj = mapear(req.body);
 		obj.save(function(err, obj) {
             if(err) return console.error(err);
             res.status(200).json(obj);

@@ -47,7 +47,7 @@
             <a href="#exampleModal" data-toggle="modal"  title="Agregar Pedido" class="btn btn-compose2" #buttonModalEdit data-toggle="modal" data-target="#exampleModal" (click)="limpiarPedido()">
                     Agregar Pedido
             </a>
-            <button type="button" class="btn btn-compose" (click)="obtenertoken()" > Obtener token ML</button>
+            <button type="button" class="btn btn-compose2" (click)="obtenertoken()" > Obtener token ML</button>
         </div>
         <ul class="inbox-nav inbox-divider">
             <app-menuformasenvios (cambioMetodoEnvio)="obtenerPedidosPorFormaEnvio($event)" [pedidosPorEnvio]="pedidosPorEnvio"></app-menuformasenvios>
@@ -73,7 +73,7 @@
         </div>
     </aside>
     <footer>
-        <input type="input" class="form-control" name="token" id="token" (focusout)="setGlobalToken()" [(ngModel)]="token" placeholder="token"/>
+        <input type="input" hidden class="form-control" name="token" id="token" (focusout)="setGlobalToken()" [(ngModel)]="token" placeholder="token"/>
     </footer>
 </div>
 

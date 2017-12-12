@@ -27,6 +27,7 @@ import { AppGlobals } from './app.global';
 import { UserloginComponent } from './components/userlogin/userlogin.component';
 import { UsersingupComponent } from './components/usersingup/usersingup.component';
 import { PedidoeditorComponent } from './components/pedidoeditor/pedidoeditor.component';
+import { EstadosComponent } from './estados/estados.component';
 
 // https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407
 @NgModule({
@@ -47,7 +48,8 @@ import { PedidoeditorComponent } from './components/pedidoeditor/pedidoeditor.co
     GpedidosxformaenvioComponent,
     UserloginComponent,
     UsersingupComponent,
-    PedidoeditorComponent
+    PedidoeditorComponent,
+    EstadosComponent
   ],
   imports: [
     BrowserModule,

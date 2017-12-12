@@ -1,28 +1,40 @@
- <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- https://image.flaticon.com/icons/svg/237/237370.svg -->
-      <img alt="" src="https://image.flaticon.com/icons/svg/138/138259.svg" style="width:50px;height:50px;padding-left:10px;">
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/pedidos']">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/pedidoslista']">Listado</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/gpedidosxformaenvio']">Grafico 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
-          </li>
-        </ul>
-        <!-- <button type="button" class="btn btn-secondary mt-3 ml-1 mr-1" (click)="obtenertoken()" > Obtener token ML</button>
-        <button type="button" class="btn btn-secondary mt-3 ml-1 mr-1" #buttonModalEdit data-toggle="modal" data-target="#exampleModal"> Agregar Pedido </button> -->
-      </div>
-    </nav>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- https://image.flaticon.com/icons/svg/237/237370.svg -->
+    <img alt="" src="https://image.flaticon.com/icons/svg/138/138259.svg" style="width:50px;height:50px;padding-left:10px;">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Inicio <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pedidos
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" [routerLink]="['/pedidos']">Tablero</a></li>
+              <li><a class="nav-link" [routerLink]="['/pedidoslista']">Listado</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Configuracion
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" [routerLink]="['/formasenvio']">Formas de Envio</a></li>
+              <li><a class="nav-link" [routerLink]="['/formaspago']">Formas de Pago</a></li>
+              <li><a class="nav-link" [routerLink]="['/estados']">Estados</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Graficos
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <a class="nav-link" [routerLink]="['/gpedidosxformaenvio']">Grafico 1</a>
+          </ul>
+        </li>
+      </ul>
+      <!-- <button type="button" class="btn btn-secondary mt-3 ml-1 mr-1" (click)="obtenertoken()" > Obtener token ML</button>
+      <button type="button" class="btn btn-secondary mt-3 ml-1 mr-1" #buttonModalEdit data-toggle="modal" data-target="#exampleModal"> Agregar Pedido </button> -->
+    </div>
+  </nav>

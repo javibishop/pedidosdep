@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PedidosComponent } from 'app/pedidos/pedidos.component';
 import { FormaenvioComponent } from 'app/formaenvio/formaenvio.component';
 import { FormaspagosComponent } from 'app/formaspagos/formaspagos.component';
+import { EstadosComponent } from 'app/estados/estados.component';
 import { PedidoslistaComponent } from 'app/pedidoslista/pedidoslista.component';
 import { GpedidosxformaenvioComponent } from 'app/components/gpedidosxformaenvio/gpedidosxformaenvio.component';
 import { UserloginComponent } from 'app/components/userlogin/userlogin.component';
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'gpedidosxformaenvio', component: GpedidosxformaenvioComponent },
   { path: 'formasenvio', component: FormaenvioComponent },
   { path: 'formaspago', component: FormaspagosComponent },
+  { path: 'estados', component: EstadosComponent },
   { path: 'login', component: UserloginComponent },
   { path: 'singup', component: UsersingupComponent }
   
