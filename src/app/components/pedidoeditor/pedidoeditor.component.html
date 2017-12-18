@@ -7,7 +7,7 @@
                 <div class="col-sm-8">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" name="id" id="id" [(ngModel)]="pedidoInfo.id" placeholder="Nùmero pedido de Mercado Libre"/>
+                        <input type="text" class="form-control" name="id" id="id" [(ngModel)]="pedidoInfo.id" (focusout)="getPedidoInfo()" placeholder="Nùmero pedido de Mercado Libre"/>
                     </div>
                 </div>
             </div>

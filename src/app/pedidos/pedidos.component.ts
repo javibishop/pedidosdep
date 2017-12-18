@@ -243,19 +243,7 @@ export class PedidosComponent implements OnInit {
     );
   }
 
-  /*Obtiene la info del pedido de mercado libre, necesita token y nro de pedido ml*/
-  getPedidoInfo(){
-    if(this.integradoConMercadoLibre){
-      this.pedidosService.getPedidoInfo(this.pedidoInfo.id, this.global.token).subscribe(data => {
-        this.pedidoInfo = this.mapPedidoMLibreToIPedido(data)
-        this.espedidomercadolibre = true;
-      });
-      }
-      else{
-        this.pedidoInfo = this.createPedido();
-        this.espedidomercadolibre = false;
-      }
-  }
+
   
   obtenertoken(){
     window.location.href = "https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=6048120304954368";
@@ -270,52 +258,6 @@ export class PedidosComponent implements OnInit {
       var dragula = new Dragula(pedido._id, pedido.envioidmercadolibre, pedido.id, pedido.nombre, pedido.numerooc, pedido.numerocliente, (pedido.pagosolicitadinero > 0), (pedido.envioadeuda  > 0), pedido.color1, tooltip, pedido.envioforma);
       return dragula;
   }
-
-  /*Mapea los campos que vienen de mlibre a el pedido */
-  mapPedidoMLibreToIPedido(body) : IPedido{
-    let pedido2 = {} as IPedido;
-    if(body.shipping && body.shipping.shipping_mode && body.shipping.shipping_mode === 'me2'){
-      pedido2.envioidmercadolibre = body.shipping.id;
-    }
-
-    pedido2.id = body.id,
-    pedido2.nombre= body.buyer.first_name + ' ' + body.buyer.last_name,
-    pedido2.usuario= body.buyer.nickname,
-    pedido2.telefono= (body.buyer.phone.area_code || '') + '-' +body.buyer.phone.number,
-    pedido2.mail= body.buyer.email,
-    pedido2.documento= body.buyer.billing_info.doc_type + '-' + body.buyer.billing_info.doc_number,
-    pedido2.envionumeroguia = '',
-    pedido2.estado= body.estado,
-    pedido2.facturado= false,
-    pedido2.numerocliente= body.numerocliente,
-    pedido2.numerofactura= body.numerofactura,
-    pedido2.numeropedido= body.numeropedido,
-    pedido2.numerooc= body.numerooc,
-    pedido2.comentario= body.comentario,
-    pedido2.envioforma= body.envioforma,
-    pedido2.enviodireccion= body.shipping.receiver_address ? (body.shipping.receiver_address.address_line ? body.shipping.receiver_address.address_line : '') : '',
-    pedido2.enviosucursal= '',
-    pedido2.envioadeuda= body.envioadeuda,
-    pedido2.enviobultos=1,
-    pedido2.enviobarrio = body.enviobarrio,
-    pedido2.enviocp = body.enviocp,
-    pedido2.pagoforma= body.pagoforma,
-    pedido2.enviolocalidad = body.shipping.receiver_address ? (body.shipping.receiver_address.city ? body.shipping.receiver_address.city.name : '') : '',
-    pedido2.envioprovincia = body.shipping.receiver_address ? (body.shipping.receiver_address.state ? body.shipping.receiver_address.state.name : '') : '',
-    pedido2.enviocp = body.shipping.receiver_address ? (body.shipping.receiver_address.zip_code ? body.shipping.receiver_address.zip_code : '') : '',
-    pedido2.envioacosto = body.shipping.shipping_option ? (body.shipping.shipping_option.cost ? body.shipping.shipping_option.cost : 0) : 0,
-    pedido2.pagoestado= '',
-    pedido2.pagosolicitadinero = 0,
-    pedido2.pagosolicitadinerocobrado = false 
-    pedido2.fechaalta = null,
-		pedido2.fechapreparado= null,
-		pedido2.fechaentregado= null,
-		pedido2.fechafinalizado= null,
-		pedido2.fechafacturado= null,
-		pedido2.fechaenviado= null,
-		pedido2.fecharecibido= null
-    return pedido2;
-  };
 
   /*Crea un IPedido vacio */
   createPedido() : IPedido{
