@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
       this.global.token = token;
     }
 
-    this.getcurf();
+    //this.getcurf();
   }
   
 
