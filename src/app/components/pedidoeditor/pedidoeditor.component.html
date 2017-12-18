@@ -8,6 +8,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-hashtag" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="id" id="id" [(ngModel)]="pedidoInfo.id" (focusout)="getPedidoInfo()" placeholder="Nùmero pedido de Mercado Libre"/>
+						<img *ngIf="espedidomercadolibre" alt="yellow box" width="22" height="22" style="padding-top: 5px;" src="../../../assets/iconoml.ico">
                     </div>
                 </div>
             </div>
