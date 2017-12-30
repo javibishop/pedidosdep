@@ -17,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
   providers: [PedidosService, FormasEnvioService, FormasPagosService, EstadosService,UsersService]
 })
 export class AppComponent implements OnInit{
-  title = 'Manejo de Pedidos ML';
+  title = 'E-logistic';
   constructor( private global: AppGlobals, private router:Router, private http: Http){
   }
 

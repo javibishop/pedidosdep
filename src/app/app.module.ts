@@ -28,6 +28,8 @@ import { UserloginComponent } from './components/userlogin/userlogin.component';
 import { UsersingupComponent } from './components/usersingup/usersingup.component';
 import { PedidoeditorComponent } from './components/pedidoeditor/pedidoeditor.component';
 import { EstadosComponent } from './estados/estados.component';
+import { VentasmlComponent } from './ventasml/ventasml.component';
+import {PedidoHelper} from './helper/pedidohelper';
 
 // https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407
 @NgModule({
@@ -49,7 +51,9 @@ import { EstadosComponent } from './estados/estados.component';
     UserloginComponent,
     UsersingupComponent,
     PedidoeditorComponent,
-    EstadosComponent
+    EstadosComponent,
+	 EstadosComponent,
+    VentasmlComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,7 @@ import { EstadosComponent } from './estados/estados.component';
     BrowserAnimationsModule,
     ToasterModule
   ],
-  providers: [AppGlobals],
+  providers: [AppGlobals,PedidoHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

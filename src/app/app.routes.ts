@@ -13,6 +13,7 @@ import { PedidoslistaComponent } from 'app/pedidoslista/pedidoslista.component';
 import { GpedidosxformaenvioComponent } from 'app/components/gpedidosxformaenvio/gpedidosxformaenvio.component';
 import { UserloginComponent } from 'app/components/userlogin/userlogin.component';
 import { UsersingupComponent } from 'app/components/usersingup/usersingup.component';
+import { VentasmlComponent } from 'app/ventasml/ventasml.component';
 
 // Route Configuration
 export const routes: Routes = [
@@ -24,7 +25,8 @@ export const routes: Routes = [
   { path: 'formaspago', component: FormaspagosComponent },
   { path: 'estados', component: EstadosComponent },
   { path: 'login', component: UserloginComponent },
-  { path: 'singup', component: UsersingupComponent }
+  { path: 'singup', component: UsersingupComponent },
+{ path: 'ventasml', component: VentasmlComponent}
   
   //,{ path: 'dogs', component: DogListComponent }
 ];

@@ -8,7 +8,9 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { FormasEnvioService } from '../services/formasenvio.service';
 import { FormasPagosService } from '../services/formaspagos.service';
 import { EstadosService } from '../services/estados.service';
-import { AppGlobals } from "../app.global"
+import { AppGlobals } from "../app.global";
+import {PedidoHelper} from '../helper/pedidohelper';
+
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -57,10 +59,10 @@ export class PedidosComponent implements OnInit {
   private color: string = "#127bdc";
   constructor(private pedidosService: PedidosService, private formaenvioService: FormasEnvioService,private formasPagosService: FormasPagosService,
     private estadosService: EstadosService,
-    private renderer: Renderer, private route:Router, private global: AppGlobals) { }
+    private renderer: Renderer, private route:Router, private global: AppGlobals, private pedidoHelper: PedidoHelper) { }
 
   ngOnInit() {
-    this.pedidoInfo = this.createPedido();
+    this.pedidoInfo = this.pedidoHelper.createPedido();
     this.pedidosPorEnvio = [];
     this.tokeninfo  = {};
     this.pedidosPendientes = [];
@@ -88,7 +90,7 @@ export class PedidosComponent implements OnInit {
   }
   
   limpiarPedido(){
-    this.pedidoInfo = this.createPedido();
+    this.pedidoInfo = this.pedidoHelper.createPedido();
   }
   pedidoGraboExito(){
     this.obtenerPedidosPorFormaEnvio({id:this.idFormaEnvioActual, color: this.colorformaenvio});
