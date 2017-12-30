@@ -23,6 +23,11 @@ getProductoInfo(pedidoId) {
     return this.http.get(`https://api.mercadolibre.com/items/MLA`+ parseInt(pedidoId))
     .map((res:Response) => res.json());
   }
+  /*https://api.mercadolibre.com/orders/search/recent?seller=172177242&access_token=APP_USR-6048120304954368-122413-22ab1c8a8a2f61f89c39c673dbb47d87__E_F__-172177242 */
+getUltimasVentas() {
+    return this.http.get('https://api.mercadolibre.com/orders/search/recent?seller='+this.global.idmercadolibre+'&access_token=' + this.global.token)
+    .map((res:Response) => res.json().results);
+  }
   
   getTokenInfo() {
     return this.http.get('https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=2434647748681214')
@@ -49,6 +54,13 @@ getProductoInfo(pedidoId) {
     }
   }
 
+grabarPedidos(pedidos) {
+    for(let p of pedidos){
+      var newJson = JSON.parse(JSON.stringify(p));
+      return this.http.post(this.global.serviceurl + 'api/pedido', newJson)
+      .map((res:Response) => res.json());
+    }
+  }
   getPedidoPorId(pedidoId: any) {
     return this.http.get(this.global.serviceurl + 'api/pedido/' + pedidoId)
     .map((res:Response) => res.json());
@@ -59,6 +71,11 @@ getProductoInfo(pedidoId) {
     .map((res:Response) => res.json());
   }
 
+/*De una lista de ids de pedido de ML verifica cuales ya estan grabados y devuelve una lista de esos ids ya grabados */
+  getIdPedidoYaGrabado(idsMl) {
+    return this.http.get(this.global.serviceurl + 'api/pedidos/verificaryagrabados/' + idsMl)
+    .map((res:Response) => res.json());
+  }
   //cambiarEstado(pedidoId, estado)
   getPedidoInfo(orderId, token) {
     return this.http.get('https://api.mercadolibre.com/orders/' + parseInt(orderId) + '?access_token=' + token)
