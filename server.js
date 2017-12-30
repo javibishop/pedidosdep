@@ -92,7 +92,6 @@ router.get('/api/mercadolibre/accesstoken',ml.generarAccessToken);
 
 //PEDIDO - rutas de acceso a la api. esto se accede desde el services.ts de pedido con x ej: this.http.post('http://localhost:3000/api/pedido/
 const pedidos = require('./server/controllers/api/pedidos');
-
 router.get('/api/pedidos',  pedidos.getAll);
 router.post('/api/pedido',  pedidos.create);
 router.get('/api/pedidos/estado/:estado',  pedidos.getPedidoPorEstado);
@@ -105,9 +104,12 @@ router.get('/api/pedidos/finalizado',  pedidos.getFinalizados);
 router.get('/api/pedidos/paneles',  pedidos.getPedidosPaneles);
 router.get('/api/pedidos/pedidoml/:id',  pedidos.getPedidoPorIdML);
 router.get('/api/pedidos/pedidoformaenvio/:envioforma',  pedidos.getPedidosPorMetodoEnvio);
+router.get('/api/pedidos/verificaryagrabados/:ids',  pedidos.getIdsPedidosYaGrabado);
+
 router.get('/api/pedidos/pedidosporformaenviocount',  pedidos.getPedidoCountPorFormaEnvio);
 router.get('/api/pedidos/pedidosporformaenviocountchart',  pedidos.getPedidoCountPorFormaEnvioChart);
-
+router.get('/api/pedidos/pedidosporestadocount',  pedidos.getPedidoCountPorEstado);
+router.get('/api/pedidos/buscar/:valor', pedidos.find);
 router.route('/api/pedido/:id')
 .get(pedidos.read)
 .put(pedidos.update)
@@ -115,6 +117,7 @@ router.route('/api/pedido/:id')
 
 const formasenvio = require('./server/controllers/api/formasenvio');
 router.get('/api/formasenvio', formasenvio.getAll);
+router.get('/api/formasenvio/buscar/:nombre', formasenvio.find);
 router.post('/api/formasenvio', formasenvio.create);
 router.route('/api/formasenvio/:id')
 .get(formasenvio.read)
