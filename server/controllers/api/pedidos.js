@@ -223,6 +223,18 @@ var pedidos = {
 		}
 		
 	},
+
+	getIdsPedidosYaGrabado: function(req, res, next){
+		var ids = [];
+		for(let id of req.params.ids){
+			ids.push(Number(id));
+		}
+		var idss = JSON.parse(req.params.ids).ids;
+		Pedidos.find({'id': { $in: idss }},{ id: 1,_id: 0 },function(err, data){
+			if(err) console.error;
+			res.json(data);
+		});
+	},
 }
 
 module.exports = pedidos;

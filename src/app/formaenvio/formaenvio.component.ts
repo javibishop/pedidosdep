@@ -12,6 +12,8 @@ export class FormaenvioComponent implements OnInit {
   formaenvio: any;
   nombrebuscar: string;
   titulo: string;
+  curf: string;
+
   constructor(private formasEnvioService: FormasEnvioService, private renderer: Renderer) { }
 
   ngOnInit() {
