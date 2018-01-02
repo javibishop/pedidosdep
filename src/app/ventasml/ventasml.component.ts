@@ -12,15 +12,16 @@ export class VentasmlComponent implements OnInit {
   cantidad: number;
   seleccionados: number = 0;
   pedidosIds = [];
-
+  token: string;
   constructor(private pedidosService:PedidosService, private pedidohelper: PedidoHelper) { }
 
   ngOnInit() {
+    this.token = localStorage.getItem("tokenml");
     this.obtenerPedidos();
   }
 
   obtenerPedidos(){
-    this.pedidosService.getUltimasVentas().map(response => response).subscribe((result: any) => {
+    this.pedidosService.getUltimasVentas(this.token).map(response => response).subscribe((result: any) => {
       for (let pml of result) {
         var pedidomapeado = this.pedidohelper.mapPedidoMLibreToIPedidoMl(pml);
         this.pedidos.push(pedidomapeado); 

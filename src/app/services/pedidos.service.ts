@@ -24,8 +24,8 @@ getProductoInfo(pedidoId) {
     .map((res:Response) => res.json());
   }
   /*https://api.mercadolibre.com/orders/search/recent?seller=172177242&access_token=APP_USR-6048120304954368-122413-22ab1c8a8a2f61f89c39c673dbb47d87__E_F__-172177242 */
-getUltimasVentas() {
-    return this.http.get('https://api.mercadolibre.com/orders/search/recent?seller='+this.global.idmercadolibre+'&access_token=' + this.global.token)
+getUltimasVentas(token) {
+    return this.http.get('https://api.mercadolibre.com/orders/search/recent?seller='+this.global.idmercadolibre+'&access_token=' + token)
     .map((res:Response) => res.json().results);
   }
   

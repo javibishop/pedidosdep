@@ -23,7 +23,7 @@ export class PedidoeditorComponent implements OnInit {
 
   @Output() gabroPedidoExito: EventEmitter<any> = new EventEmitter();
   @Output() gabroPedidoError: EventEmitter<any> = new EventEmitter();
-
+  tokenml: string;
   estados= [];
   formasdepago = [];
   formasenvios = [];
@@ -37,6 +37,7 @@ export class PedidoeditorComponent implements OnInit {
     this.getFormasEnvio();
     this.getFormasPagos();
     this.getEstados();
+    this.tokenml =  localStorage.getItem("tokenml");
   }
 
   grabarPedido(){
@@ -73,7 +74,7 @@ export class PedidoeditorComponent implements OnInit {
     /*Obtiene la info del pedido de mercado libre, necesita token y nro de pedido ml*/
     getPedidoInfo(){
       if(this.integradoConMercadoLibre){
-        this.pedidosService.getPedidoInfo(this.pedidoInfo.id, this.global.token).subscribe(data => {
+        this.pedidosService.getPedidoInfo(this.pedidoInfo.id, this.tokenml).subscribe(data => {
           this.pedidoInfo = this.pedidoHelper.mapPedidoMLibreToIPedido(data)
           //this.espedidomercadolibre = true;
         });

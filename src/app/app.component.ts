@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
     var token = this.getParameterByName('access_token', window.location.href); 
     if(token){
       this.global.token = token;
+      localStorage.setItem("tokenml", token);
     }
 
     //this.getcurf();
